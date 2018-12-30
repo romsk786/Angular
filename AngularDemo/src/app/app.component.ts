@@ -6,8 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title: any = 'First Demo';
-  firstName: string = 'keyur';
+  title: any = 'Number Demo';
 
   constructor(){
     console.log("App Component Object Created...!");

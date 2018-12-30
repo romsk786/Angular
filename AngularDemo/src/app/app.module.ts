@@ -2,23 +2,19 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { MessageComponent } from './message/message.component';
-import { FailureMessageComponent } from './failure-message/failure-message.component';
-import { WarningMessageComponent } from './warning-message.component';
 import { StudentComponent } from './student/student.component';
+import { NumberComponent } from './number/number.component';
 @NgModule({
   declarations: [
     AppComponent,
-    MessageComponent,
-    FailureMessageComponent,
-    WarningMessageComponent,
-    StudentComponent
+    StudentComponent,
+    NumberComponent
   ],
   imports: [
     BrowserModule
   ],
   providers: [],
-  bootstrap: [MessageComponent,AppComponent]
+  bootstrap: [AppComponent]
 })
 export class AppModule { 
 }

@@ -1,0 +1,33 @@
+<p>
+    {{numberList}}
+  </p>
+  <div class="row form-group">
+    <div class="col-sm-4">
+      <label>Num1: </label>
+    </div>
+    <div class="col-sm-4">
+      <input type="string"  num=snum1 #snum1 class="form-control"/>
+    </div>
+    <div class="col-sm-4">
+        <button class="btn btn-info" (click)="addNum(snum1.value)">Num1</button>
+    </div>
+  </div>
+  <div class="row form-group">
+      <div class="col-sm-4">
+        <label>Num2: </label>
+      </div>
+      <div class="col-sm-4">
+        <input type="string" num=snum2 #snum2 class="form-control"/>
+      </div>
+      <div class="col-sm-4">
+          <button class="btn btn-info" (click)="addNum(snum2.value)">Num2</button>
+      </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-4">
+      <button class="btn btn-info" (click)="addNums(snum1.value,snum2.value)">Sum</button>
+    </div>
+    <div class="col-sm-4">
+        <h3>   {{sum}}</h3>
+    </div>
+  </div>
