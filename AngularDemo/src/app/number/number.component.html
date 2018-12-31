@@ -25,9 +25,33 @@
   </div>
   <div class="row">
     <div class="col-sm-4">
-      <button class="btn btn-info" (click)="addNums(snum1.value,snum2.value)">Sum</button>
+      <button class="btn btn-info" (click)="addition(snum1.value,snum2.value)">Sum</button>
     </div>
     <div class="col-sm-4">
         <h3>   {{sum}}</h3>
     </div>
+  </div>
+  <div class="row">
+      <div class="col-sm-4">
+        <button class="btn btn-info" (click)="subtraction(snum1.value,snum2.value)">Minus</button>
+      </div>
+      <div class="col-sm-4">
+          <h3>   {{minus}}</h3>
+      </div>
+    </div>
+  <div class="row">
+       <div class="col-sm-4">
+          <button class="btn btn-info" (click)="multiplication(snum1.value,snum2.value)">Multiply</button>
+       </div>
+       <div class="col-sm-4">
+          <h3>   {{multiply}}</h3>
+       </div>
+  </div>
+  <div class="row">
+       <div class="col-sm-4">
+           <button class="btn btn-info" (click)="division(snum1.value,snum2.value)">Divide</button>
+       </div>
+       <div class="col-sm-4">
+          <h3>   {{divide}}</h3>
+       </div>
   </div>

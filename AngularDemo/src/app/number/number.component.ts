@@ -10,6 +10,9 @@ export class NumberComponent implements OnInit {
 
   numberList: string[] = [];
   sum: number;
+  minus: number;
+  multiply: number;
+  divide: number;
   constructor() { 
     console.log("NumberComponent Object created");
   }
@@ -22,9 +25,22 @@ export class NumberComponent implements OnInit {
     console.log(number);
     
   }
-  addNums(number1:string,number2:string):void{
-    
+  addition(number1:string,number2:string):void{
     this.sum = parseInt(number1) + parseInt(number2);
     console.log(this.sum);
+  }
+  subtraction(number1:string,number2:string):void{
+    this.minus = parseInt(number1) - parseInt(number2);
+    console.log(this.minus);
+  }
+  
+  multiplication(number1:string,number2:string):void{
+    this.multiply = parseInt(number1) * parseInt(number2);
+    console.log(this.multiply);
+  }
+  
+  division(number1:string,number2:string):void{
+    this.divide = parseInt(number1) / parseInt(number2);
+    console.log(this.divide);
   }
 }
