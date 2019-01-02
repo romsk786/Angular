@@ -35,6 +35,7 @@ export class MarksheetComponent implements OnInit {
     this.sub4 = parseInt(sub4);
     this.sub5 = parseInt(sub5);
     this.sub6 = parseInt(sub6);
+    this.total = this.sub1 + this.sub2 + this.sub3 + this.sub4 + this.sub5 + this.sub6;
   }
 
   setTotal(total:string):void{
