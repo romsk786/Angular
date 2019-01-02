@@ -1,0 +1,95 @@
+<div class="table">
+  <table>
+    <tr>
+      <thead>
+        <tr>
+          <h1>
+            Scorecard
+          </h1>
+        </tr>
+      </thead>
+    <tbody>
+      <td>
+        <div class="col-sm-6">
+          <input type="string"  num=sub1 #sub1 class="form-control"/>
+        </div>
+        <div>
+          <button class="btn btn-info" (click)="setMarks(sub1.value)">Subject1: </button>
+        </div>
+      </td>
+      <td>
+        <div class="col-sm-6">
+          <input type="string"  num=sub2 #sub2 class="form-control"/>
+        </div>
+        <div>
+          <button class="btn btn-info" (click)="setMarks(sub2.value)">Subject2: </button>
+        </div>
+      </td>
+      <td>
+        <div class="col-sm-6">
+          <input type="string"  num=sub3 #sub3 class="form-control"/>
+        </div>
+        <div>
+          <button class="btn btn-info" (click)="setMarks(sub3.value)">Subject3: </button>
+        </div>
+      </td>
+      <td>
+        <div class="col-sm-6">
+          <input type="string"  num=sub4 #sub4 class="form-control"/>
+        </div>
+        <div>
+          <button class="btn btn-info" (click)="setMarks(sub4.value)">Subject4: </button>
+        </div>
+      </td>
+      <td>
+        <div class="col-sm-6">
+          <input type="string"  num=sub5 #sub5 class="form-control"/>
+        </div>
+        <div>
+          <button class="btn btn-info" (click)="setMarks(sub5.value)">Subject5: </button>
+        </div>
+      </td>
+      <td>
+        <div class="col-sm-6">
+          <input type="string"  num=sub6 #sub6 class="form-control"/>
+        </div>
+        <div>
+          <button class="btn btn-info" (click)="setMarks(sub6.value)">Subject6: </button>
+        </div>
+      </td>      
+      <td>
+        <input type="text" #marks class="form-control"/>
+      </td>
+      <td>
+        <button class="btn btn-warning" (click)="totalMarks(sub1,sub2,sub3,sub4,sub5,sub6)">Total Marks</button>
+      </td>
+    </tbody>
+    </tr>
+  </table>
+</div>
+<div class="col">
+  <table>
+    <tr>
+      <td><input type=text #total class="form-control" (blur)="setTotal(total.value)"/></td>
+      <td><button class="btn btn-warning" (click)="calcPer(total.value)">Calculate Per</button></td>
+      {{total}}
+    </tr>    
+    <tr [ngSwitch]="grade">
+      <td *ngSwitchCase="'D'">
+        Your Grade is Distinction
+      </td>
+      <td *ngSwitchCase="'F'">
+        Your Grade is First Class
+      </td>
+      <td *ngSwitchCase="'S'">
+        Your Grade is Second Class
+      </td>
+      <td *ngSwitchCase="'P'">
+        Your Grade is Pass
+      </td>
+      <td *ngSwitchCase="'FAIL'">
+        Sorry you are Fail...!;
+      </td>
+    </tr>
+  </table>
+</div>
