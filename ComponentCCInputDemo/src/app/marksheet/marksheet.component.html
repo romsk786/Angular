@@ -1,0 +1,41 @@
+<div class="row">
+    <div class="col-md-12">
+      <div class="card bg-info text-white">
+        <div class="card-heading bg-warning"></div>
+        <div class="card-body" style="color: black ;background-color: darkgray">
+          <div class="row form-group">
+            <div class="col-sm-1.5">English: </div>
+            <div class="col-sm-1"><input type=number class="form-control" name=num1 [(ngModel)]="number1" /></div>            
+            <div class="col-sm-1.5">Hindi: </div>
+            <div class="col-sm-1"><input type=number class="form-control" name=num2 [(ngModel)]="number2" /></div>            
+            <div class="col-sm-1.5">Maths: </div>
+            <div class="col-sm-1"><input type=number class="form-control" name=num3 [(ngModel)]="number3" /></div>            
+            <div class="col-sm-1.5">Physics: </div>
+            <div class="col-sm-1"><input type=number class="form-control" name=num4 [(ngModel)]="number4" /></div>            
+            <div class="col-sm-1.5">Chemistry: </div>
+            <div class="col-sm-1"><input type=number class="form-control" name=num5 [(ngModel)]="number5" /></div>            
+            <div class="col-sm-1.5">Social Science: </div>
+            <div class="col-sm-1"><input type=number class="form-control" name=num6 [(ngModel)]="number6" /></div>            
+            <div class="col-sm-1"><button class="btn btn-dark" (click)="totalMarks()">Total</button></div>
+          </div>
+        </div>
+        <div class="card-footer" style="background-color: lightgray">
+          <div class="row">
+            <div class="col">
+              <table class="table table-stripped">
+                <app-my-grid 
+                  [columnHeaderList]="headerList"
+                  [columnNameList]="columnNameList"
+                  [dataList]="marksheetList"  
+                >   
+                </app-my-grid>
+              </table>
+            </div>
+          </div>
+        </div>  
+      </div>
+    </div>
+</div>
+
+
+
