@@ -21,16 +21,9 @@
           </div>
           <div class="table table-stripped" style="background-color: darkgray">
           <div class="row">
-            <div class="col-md-2"><button class="btn btn-info" (click)="totalMarks()">Total Marks</button></div>
-            <div class="col-md-2">:   {{totalScore}}</div>
-          </div>
-          <div class="row">
-            <div class="col-md-2"><button [disabled]="totalScore == 0" class="btn btn-info" (click)="calculatePercent()">Percentage</button></div>
-            <div class="col-md-2">:   {{percent}}</div>
-          </div>  
-          <div class="row">
-            <div class="col-md-2"><button [disabled]="totalScore == 0" class="btn btn-info" (click)="calculateGrade()">Final Grade</button></div>
-            <div class="col-md-2">:   {{grade}}</div>
+            <div class="col-md-4"><button class="btn btn-info" (click)="totalMarks()">Total Marks</button></div>
+            <div class="col-md-4"><button [disabled]="totalScore == 0" class="btn btn-info" (click)="calculatePercent()">Percentage</button></div>
+            <div class="col-md-4"><button [disabled]="totalScore == 0" class="btn btn-info" (click)="calculateGrade()">Final Grade</button></div>
           </div>
           </div>
         </div>   
@@ -38,17 +31,39 @@
     </div>
 </div>
 <div class="row">
-    <div class="col">
-      <table class="table table-stripped" style="background-color: lightgray">
+  <div class="col">
+    <h3>    </h3>
+  </div>
+</div>
+<div class="card bg-info text-white">
+  
+  <div class="card-body" style="color: white; background-color: rgb(78, 79, 82)">
+    <div class="row form-group">
+      <div class="col-md-6">
         <app-my-grid 
           [columnHeaderList]="headerList"
           [columnNameList]="columnNameList"
           [dataList]="marksheetList"  
         >   
         </app-my-grid>
-      </table>
+      </div>
+      <div class="col-md-6">
+        <div class="row">
+            <div class="col-md-6" style="color: black; background-color: yellowgreen">
+              <h3>Total Score: {{totalScore}}</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6" style="color: black; background-color: cadetblue">
+              <h3>Percentage: {{percent}}</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6" style="color: black; background-color: salmon">
+              <h3>Grade: {{grade}}</h3>
+            </div>
+        </div>
+      </div>
     </div>
   </div>
-
-
-
+</div>
