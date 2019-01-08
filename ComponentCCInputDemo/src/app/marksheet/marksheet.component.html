@@ -1,8 +1,10 @@
 <div class="row">
     <div class="col-md-12">
       <div class="card bg-info text-white">
-        <div class="card-heading bg-warning"></div>
-        <div class="card-body" style="color: black ;background-color: darkgray">
+        <div class="card-heading bg-warning">
+          <h1 style="text-align: center; color: brown">Mark Sheet Component</h1>
+        </div>
+        <div class="card-body" style="color: white ;background-color: rgb(78, 79, 82)">
           <div class="row form-group">
             <div class="col-sm-1.5">English: </div>
             <div class="col-sm-1"><input type=number class="form-control" name=num1 [(ngModel)]="number1" /></div>            
@@ -16,26 +18,37 @@
             <div class="col-sm-1"><input type=number class="form-control" name=num5 [(ngModel)]="number5" /></div>            
             <div class="col-sm-1.5">Social Science: </div>
             <div class="col-sm-1"><input type=number class="form-control" name=num6 [(ngModel)]="number6" /></div>            
-            <div class="col-sm-1"><button class="btn btn-dark" (click)="totalMarks()">Total</button></div>
           </div>
-        </div>
-        <div class="card-footer" style="background-color: lightgray">
+          <div class="table table-stripped" style="background-color: darkgray">
           <div class="row">
-            <div class="col">
-              <table class="table table-stripped">
-                <app-my-grid 
-                  [columnHeaderList]="headerList"
-                  [columnNameList]="columnNameList"
-                  [dataList]="marksheetList"  
-                >   
-                </app-my-grid>
-              </table>
-            </div>
+            <div class="col-md-2"><button class="btn btn-info" (click)="totalMarks()">Total Marks</button></div>
+            <div class="col-md-2">:   {{totalScore}}</div>
           </div>
-        </div>  
+          <div class="row">
+            <div class="col-md-2"><button [disabled]="totalScore == 0" class="btn btn-info" (click)="calculatePercent()">Percentage</button></div>
+            <div class="col-md-2">:   {{percent}}</div>
+          </div>  
+          <div class="row">
+            <div class="col-md-2"><button [disabled]="totalScore == 0" class="btn btn-info" (click)="calculateGrade()">Final Grade</button></div>
+            <div class="col-md-2">:   {{grade}}</div>
+          </div>
+          </div>
+        </div>   
       </div>
     </div>
 </div>
+<div class="row">
+    <div class="col">
+      <table class="table table-stripped" style="background-color: lightgray">
+        <app-my-grid 
+          [columnHeaderList]="headerList"
+          [columnNameList]="columnNameList"
+          [dataList]="marksheetList"  
+        >   
+        </app-my-grid>
+      </table>
+    </div>
+  </div>
 
 
 

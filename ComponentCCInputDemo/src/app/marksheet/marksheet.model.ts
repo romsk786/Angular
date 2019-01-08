@@ -1,3 +1,3 @@
 export class Marksheet{
-    constructor(public subject?:string,public marks?:number){}    
+    constructor(public subject?:string,public marks?:string){}    
 }
