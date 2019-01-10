@@ -22,8 +22,8 @@
           <div class="table table-stripped" style="background-color: darkgray">
           <div class="row">
             <div class="col-md-4"><button class="btn btn-info" (click)="totalMarks()">Total Marks</button></div>
-            <div class="col-md-4"><button [disabled]="totalScore == 0" class="btn btn-info" (click)="calculatePercent()">Percentage</button></div>
-            <div class="col-md-4"><button [disabled]="totalScore == 0" class="btn btn-info" (click)="calculateGrade()">Final Grade</button></div>
+            <div class="col-md-4"><button [disabled]="totalScore === 0" class="btn btn-info" (click)="calculatePercent()">Percentage</button></div>
+            <div class="col-md-4"><button [disabled]="totalScore === 0" class="btn btn-info" (click)="calculateGrade()">Final Grade</button></div>
           </div>
           </div>
         </div>   
@@ -55,7 +55,7 @@
         </div>
         <div class="row">
             <div class="col-md-8" style="color: black; background-color: cadetblue">
-              <h3>Percentage : {{percent}}</h3>
+              <h3>Percentage : {{percent}}%</h3>
             </div>
         </div>
         <div class="row">

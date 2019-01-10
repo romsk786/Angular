@@ -12,14 +12,14 @@ export class MarksheetComponent implements OnInit {
   headerList: string[] = ["Subject","Marks"];
   columnNameList: string[] = ["subject","marks"];
   marksheetList: Marksheet[] = [];
-  number1: string;
-  number2: string;
-  number3: string;
-  number4: string;
-  number5: string;
-  number6: string;
-  percent: string;
-  totalScore: string = '';
+  number1: number;
+  number2: number;
+  number3: number;
+  number4: number;
+  number5: number;
+  number6: number;
+  percent: number;
+  totalScore: number;
   grade: string = '';
 
   constructor() { }
@@ -28,21 +28,21 @@ export class MarksheetComponent implements OnInit {
   }
 
   totalMarks():void{
-    let total1:string = parseInt(this.number1)+parseInt(this.number2)+parseInt(this.number3)+parseInt(this.number4)+parseInt(this.number5)+parseInt(this.number6)+'';
-    this.totalScore = total1+'';
+    let total1:number = this.number1+this.number2+this.number3+this.number4+this.number5+this.number6;
+    this.totalScore = total1;
   }
 
   calculatePercent(): void{
-    this.percent = parseInt((parseInt(this.totalScore)/6).toFixed(2))+'%';
+    this.percent = parseInt((this.totalScore/6).toPrecision(4));
   }
   calculateGrade():void{
-    if(parseInt(this.percent) >= 70)
+    if(this.percent >= 70)
       this.grade = 'Distinction';
-    else if(parseInt(this.percent) >= 60)
+    else if(this.percent >= 60)
       this.grade = 'First Class';
-    else if(parseInt(this.percent) >= 50)
+    else if(this.percent >= 50)
       this.grade = 'Second Class';
-    else if(parseInt(this.percent) >= 40)
+    else if(this.percent >= 40)
       this.grade = 'Pass Class';
     else
       this.grade = 'FAIL';
