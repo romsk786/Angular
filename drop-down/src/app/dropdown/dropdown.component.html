@@ -1,3 +1,16 @@
-<p>
-  dropdown works!
-</p>
+<div class="container">
+    <p>Select a Country from the drop down</p>
+    <div class="row form-group">
+        <div class="col">
+          <select name="country" class="form-control">
+            <option [value]="-1">-:Select Country:-</option>
+            <option *ngFor="let country of countryList" [value]="country">
+              {{country.code}}
+            </option>
+          </select>
+          <h4>Country Id: {{country.id}}</h4>
+          <h4>Country Code: {{country.code}}</h4>
+          <h4>Country Description: {{country.desc}}</h4>
+      </div>
+    </div>
+  </div>

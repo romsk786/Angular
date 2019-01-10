@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {Dropdown} from './dropdown.model';
 
 @Component({
   selector: 'app-dropdown',
@@ -6,10 +7,30 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./dropdown.component.css']
 })
 export class DropdownComponent implements OnInit {
-
-  constructor() { }
+  
+  constructor() { 
+    console.log("Drop down component created..");
+  }
 
   ngOnInit() {
   }
-
+  
+  countryList = [
+    {
+      id:1,
+      code:"IND",
+      desc:"India"
+    },
+    {
+      id:2,
+      code:"US",
+      desc:"United States"
+    },
+    {
+      id:3,
+      code:"UK",
+      desc:"United Kingdom"
+    }
+  ];
+  
 }
