@@ -33,7 +33,7 @@ export class MarksheetComponent implements OnInit {
   }
 
   calculatePercent(): void{
-    this.percent = parseInt((this.totalScore/6).toPrecision(4));
+    this.percent = this.totalScore/6;
   }
   calculateGrade():void{
     if(this.percent >= 70)
