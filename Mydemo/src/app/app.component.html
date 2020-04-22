@@ -1,0 +1,448 @@
+<style>
+  :host {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    font-size: 14px;
+    color: #333;
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin: 8px 0;
+  }
+
+  p {
+    margin: 0;
+  }
+
+  .spacer {
+    flex: 1;
+  }
+
+  .toolbar {
+    height: 60px;
+    margin: -8px;
+    display: flex;
+    align-items: center;
+    background-color: rgb(75, 74, 74);
+    color: white;
+    font-weight: 600;
+  }
+
+  .toolbar img {
+    margin: 0 16px;
+  }
+
+  .toolbar #twitter-logo {
+    height: 40px;
+    margin: 0 16px;
+  }
+
+  .toolbar #twitter-logo:hover {
+    opacity: 0.8;
+  }
+
+  .content {
+    display: flex;
+    margin: 32px auto;
+    padding: 0 16px;
+    max-width: 960px;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  svg.material-icons {
+    height: 24px;
+    width: auto;
+  }
+
+  svg.material-icons:not(:last-child) {
+    margin-right: 8px;
+  }
+
+  .card svg.material-icons path {
+    fill: #888;
+  }
+
+  .card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 16px;
+  }
+
+  .card {
+    border-radius: 3px;
+    border: 1px solid grey;
+    background-color: white ;
+    height: 40px;
+    width: 160px;
+    margin: 0 8px 16px;
+    padding: 16px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.2s ease-in-out;
+    line-height: 24px;
+  }
+
+  .card-container .card:not(:last-child) {
+    margin-right: 0;
+  }
+
+  .card.card-medium {
+    height: 25px;
+    width: 100px;
+  }
+  .card.card-small {
+    height: 5px;
+    width: 100px;
+  }
+
+  .card-container .card:not(.highlight-card) {
+    cursor: pointer;
+  }
+
+  .card-container .card:not(.highlight-card):hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 17px rgba(black, 0.35);
+  }
+
+  .card-container .card:not(.highlight-card):hover .material-icons path {
+    fill: rgb(105, 103, 103);
+  }
+
+  .card.highlight-card {
+    background-color: rgb(105, 103, 103);
+    color: white;
+    font-weight: 600;
+    border: none;
+    width: auto;
+    min-width: 30%;
+    position: relative;
+  }
+
+  .card.card.highlight-card span {
+    margin-left: 60px;
+  }
+
+  svg#rocket {
+    width: 80px;
+    position: absolute;
+    left: -10px;
+    top: -24px;
+  }
+
+  svg#rocket-smoke {
+    height: 100vh;
+    position: absolute;
+    top: 10px;
+    right: 180px;
+    z-index: -10;
+  }
+
+  a,
+  a:visited,
+  a:hover {
+    color: #1976d2;
+    text-decoration: none;
+  }
+
+  a:hover {
+    color: #125699;
+  }
+
+  .terminal {
+    position: relative;
+    width: 80%;
+    max-width: 600px;
+    border-radius: 6px;
+    padding-top: 45px;
+    margin-top: 8px;
+    overflow: hidden;
+    background-color: rgb(15, 15, 16);
+  }
+
+  .terminal::before {
+    content: "\2022 \2022 \2022";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 4px;
+    background: rgb(58, 58, 58);
+    color: #c2c3c4;
+    width: 100%;
+    font-size: 2rem;
+    line-height: 0;
+    padding: 14px 0;
+    text-indent: 4px;
+  }
+
+  .terminal pre {
+    font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace;
+    color: white;
+    padding: 0 1rem 1rem;
+    margin: 0;
+  }
+
+  .circle-link {
+    height: 40px;
+    width: 40px;
+    border-radius: 40px;
+    margin: 8px;
+    background-color: white;
+    border: 1px solid #eeeeee;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    transition: 1s ease-out;
+  }
+
+  .circle-link:hover {
+    transform: translateY(-0.25rem);
+    box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.2);
+  }
+
+  
+  svg#clouds {
+    position: fixed;
+    bottom: -160px;
+    left: -230px;
+    z-index: -10;
+    width: 1920px;
+  }
+
+
+  /* Responsive Styles */
+  @media screen and (max-width: 767px) {
+
+    .card-container > *:not(.circle-link) ,
+    .terminal {
+      width: 100%;
+    }
+
+    .card:not(.highlight-card) {
+      height: 16px;
+      margin: 8px 0;
+    }
+
+    .card.highlight-card span {
+      margin-left: 72px;
+    }
+
+    svg#rocket-smoke {
+      right: 120px;
+      transform: rotate(-5deg);
+    }
+  }
+
+  @media screen and (max-width: 575px) {
+    svg#rocket-smoke {
+      display: none;
+      visibility: hidden;
+    }
+  }
+</style>
+
+<!-- Toolbar -->
+<div class="toolbar" role="banner">
+    <img src="assets/images/rk.png" alt="logo" style="width: 60px; height: 60px;">
+  <h2>   Welcome to {{ title }}</h2>
+    <div class="spacer"></div>
+  </div>
+
+<div class="content" role="main">
+
+  <!-- Highlight Card -->
+  <div class="card highlight-card card-medium">
+    <h2>Important Application Links</h2>
+  </div>
+
+
+  <div class="card-container">
+    <a class="card" target="_blank" rel="noopener" href="https://ptc-pcx-prod.pes-prod.nike.com/Windchill/rfa/jsp/main/Main.jsp">
+      <img src="assets/images/pcx.png" alt="logo" style="width: 70px; height: 70px;">   
+    </a>
+    
+    <a class="card" target="_blank" rel="noopener" href="https://confluence.nike.com/display/PAS/Product+Development">
+      <img src="assets/images/atl.site.logo.png" alt="logo" style="width: 200px; height: 60px;">
+    </a>
+
+    <a class="card" target="_blank" rel="noopener" href="https://nike.splunkcloud.com/en-US/app/launcher/home">
+      <img src="assets/images/splunk-cloud-4.png" alt="logo" style="width: 190px; height: 60px;">
+    </a>
+
+    <a class="card" target="_blank" rel="noopener" href="https://us-west-2.console.aws.amazon.com/console/home?region=us-west-2#">
+        <img src="assets/images/aws.png" alt="logo" style="width: 150px; height: 60px;">
+    </a>
+
+    <a class="card" target="_blank" rel="noopener" href="https://nike.ent.box.com/folder/48198435292">
+        <img src="assets/images/box.png" alt="logo" style="width: 150px; height: 60px;">
+    </a>
+
+    <a class="card" target="_blank" rel="noopener" href="https://ptc-pcx-prod.crtyovkh64ot.us-west-2.rds.amazonaws.com:8080/em/shell#/dbhome/show_regions">
+        <img src="assets/images/oracle.png" alt="logo" style="width: 50px; height: 50px;">
+            <h2 style="color: black;font-size: x-large;">EM Express</h2>
+    </a>
+
+    <a class="card" target="_blank" rel="noopener" href="https://prod-parc-app-dashboard.pes-prod.nike.com/#">
+        <img src="assets/images/parc.png" alt="logo" style="width: 140px; height: 60px;">
+    </a>    
+
+    <a class="card" target="_blank" rel="noopener" href="https://blogs.nike.com/pcx/training-support/">
+        <img src="assets/images/pcxtraining.png" alt="logo" style="width: 190px; height: 60px;">
+    </a>
+  </div>
+<div class="row">
+  <div class="col-span-12">
+    &nbsp;
+  </div>
+</div>
+
+<!-- Highlight Card -->
+<div class="card highlight-card card-medium">   
+  <h2>Quick Links</h2>  
+</div>
+
+<div class="card-container">
+    <a class="card" target="_blank" rel="noopener" href="https://confluence.nike.com/display/PAS/Splunk+Search+Criteria">  
+      <h2 style="color: black;font-size: small;text-align: center;">Splunk Search Criteria</h2> 
+    </a>
+    <a class="card" target="_blank" rel="noopener" href="https://confluence.nike.com/display/PAS/URL%27s+to+re-pull+PCX+Objects+for+FWPDM">  
+      <h2 style="color: black;font-size: small;text-align: center;">URL's to re-pull PCX Objects for FW PDM</h2> 
+    </a>
+    <a class="card" target="_blank" rel="noopener" href="https://confluence.nike.com/display/PAS/Incident+Knowledge+Base+-+PCX">  
+      <h2 style="color: black;font-size: small;text-align: center;">Incident Knowledge Base</h2> 
+    </a>
+    <a class="card" target="_blank" rel="noopener" href="https://confluence.nike.com/pages/viewpage.action?pageId=255535501">  
+      <h2 style="color: black;font-size: small;text-align: center;">Remove PDM Long Description</h2> 
+    </a>
+    <a class="card" target="_blank" rel="noopener" href="https://confluence.nike.com/display/PAS/How+to+use+Postman+to+verify+data+in+PDH">  
+      <h2 style="color: black;font-size: small;text-align: center;">Postman Information</h2> 
+    </a>
+    <a class="card" target="_blank" rel="noopener" href="https://confluence.nike.com/display/PAS/How+to+execute+PCX+Data+Collector+job">  
+      <h2 style="color: black;font-size: small;text-align: center;">PCX Data Collector Utility</h2> 
+    </a>
+    <a class="card" target="_blank" rel="noopener" href="https://confluence.nike.com/display/PAS/How+to+execute+PCX+Data+Publish+Utility">  
+      <h2 style="color: black;font-size: small;text-align: center;">PCX Data Publish Utility</h2> 
+    </a>
+    <a class="card" target="_blank" rel="noopener" href="https://confluence.nike.com/display/PAS/How+to+execute+PCX+Exchange+Rate+Utility">  
+      <h2 style="color: black;font-size: small;text-align: center;">PCX Exchange Rate Utility</h2> 
+    </a>
+    <a class="card" target="_blank" rel="noopener" href="https://token.niketech.com/#">  
+      <h2 style="color: black;font-size: small;text-align: center;">Token Generator</h2> 
+    </a>
+    <a class="card" target="_blank" rel="noopener" href="http://nke-lnx-pcs-p032:8080/ords/pcpubp1/f?p=103:1:5866081879950:::::">  
+      <h2 style="color: black;font-size: small;text-align: center;">PCX BOM Import Tool</h2> 
+    </a>
+    <a class="card" target="_blank" rel="noopener" href="https://ppm-nike.saas.microfocus.com/itg/dashboard/app/portal/PageView.jsp">  
+      <h2 style="color: black;font-size: small;text-align: center;">Relay</h2> 
+    </a>
+    <a class="card" target="_blank" rel="noopener" href="https://nike.sharepoint.com/teams/na14/pes/SitePages/PCX%20Pages/Engineering%20and%20Technology%20Pages/Engineering%20and%20Technology%20-%20E%26T%20Team%20Documents.aspx">  
+      <h2 style="color: black;font-size: small;text-align: center;">Security Matrix</h2> 
+    </a>
+</div>
+
+<div>  
+      &nbsp;      
+</div>
+  
+<div class="card highlight-card card-medium">
+  <h2>
+    DL's of PCX Teams
+  </h2>
+</div>
+
+  <input type="hidden" #selection>
+
+  <div class="card-container" style="font-style: italic; font: xx-large;">
+    <div class="card card-small" (click)="selection.value = 'adv'" tabindex="0">
+      <span>PCX ADV</span>
+    </div>
+
+    <div class="card card-small" (click)="selection.value = 'fl'" tabindex="0">
+      <span>PCX FL</span>
+    </div>
+  </div>
+
+  <div class="card-container"  style="font-style: italic; font: bolder;">
+    <div class="card card-small" (click)="selection.value = 'jumpman'" tabindex="0">
+      <span>Jumpman</span>
+    </div>
+
+    <div class="card card-small" (click)="selection.value = 'rw'" tabindex="0">
+      <span>Royal Wafflers</span>
+    </div>
+
+    <div class="card card-small" (click)="selection.value = 'hypercool'" tabindex="0">
+      <span>Hypercool</span>
+    </div>
+
+    <div class="card card-small" (click)="selection.value = 'parc'" tabindex="0">
+      <span>PARC</span>
+    </div>
+
+    <div class="card card-small" (click)="selection.value = 'stormbreaker'" tabindex="0">
+      <span>Stormbreaker</span>
+    </div>
+
+    <div class="card card-small" (click)="selection.value = 'cortez'" tabindex="0">
+      <span>Cortez</span>
+    </div>
+
+    <div class="card card-small" (click)="selection.value = 'aria'" tabindex="0">
+      <span>ARIA</span>
+    </div>
+
+    <div class="card card-small" (click)="selection.value = 'drivingforce'" tabindex="0">
+      <span>Driving Force</span>
+    </div>
+
+    <div class="card card-small" (click)="selection.value = 'hyperadapt'" tabindex="0">
+      <span>Hyper Adapt</span>
+    </div>
+
+    <div class="card card-small" (click)="selection.value = 'pdh'" tabindex="0">
+      <span>PDH</span>
+    </div>
+
+    <div class="card card-small" (click)="selection.value = 'foundation'" tabindex="0">
+      <span>Foundation</span>
+    </div>
+  </div>
+
+  <!-- Terminal -->
+  <div class="terminal" [ngSwitch]="selection.value">
+      <pre *ngSwitchDefault>Lst-Technology.PES.MTP.PCX.Adv.Support@nike.com</pre>
+      <pre *ngSwitchCase="'adv'">Lst-Technology.PES.MTP.PCX.Adv.Support@nike.com</pre>
+      <pre *ngSwitchCase="'fl'">Lst-Technology.PES.PCX.Support@nike.com</pre>
+      <pre *ngSwitchCase="'jumpman'">Lst-GT.Create.PD.Jumpman@nike.com</pre>
+      <pre *ngSwitchCase="'rw'">Lst-GT.Create.PD.RoyalWafflers@nike.com</pre>
+      <pre *ngSwitchCase="'hypercool'">Lst-GT.Create.PD.Hypercool@nike.com</pre>
+      <pre *ngSwitchCase="'cortez'">Lst-GT.Create.PD.Cortez@nike.com</pre>
+      <pre *ngSwitchCase="'parc'">Lst-Technology.PCX.PARCAdvanceSupport@nike.com</pre>
+      <pre *ngSwitchCase="'stormbreaker'">Lst-GT.Create.PD.Foundation.StormBreaker@nike.com</pre>
+      <pre *ngSwitchCase="'drivingforce'">Lst-GT.Create.PD.DrivingForce@nike.com</pre>
+      <pre *ngSwitchCase="'hyperadapt'">Lst-GT.Create.PD.Foundation.HyperAdapt@nike.com</pre>
+      <pre *ngSwitchCase="'aria'">Lst-Technology.PDA.MPC.Analytics@nike.com; Yashodhan.Pitolwala@nike.com;</pre>
+      <pre *ngSwitchCase="'pdh'">Lst-Technology.PES.PDH.Support@nike.com</pre>
+      <pre *ngSwitchCase="'foundation'">Lst-GT.Create.PD.Foundation.Technocrats@nike.com</pre>
+  </div>
+
+  <svg id="clouds" alt="Gray Clouds Background" xmlns="http://www.w3.org/2000/svg" width="2611.084" height="485.677" viewBox="0 0 2611.084 485.677">
+    <path id="Path_39" data-name="Path 39" d="M2379.709,863.793c10-93-77-171-168-149-52-114-225-105-264,15-75,3-140,59-152,133-30,2.83-66.725,9.829-93.5,26.25-26.771-16.421-63.5-23.42-93.5-26.25-12-74-77-130-152-133-39-120-212-129-264-15-54.084-13.075-106.753,9.173-138.488,48.9-31.734-39.726-84.4-61.974-138.487-48.9-52-114-225-105-264,15a162.027,162.027,0,0,0-103.147,43.044c-30.633-45.365-87.1-72.091-145.206-58.044-52-114-225-105-264,15-75,3-140,59-152,133-53,5-127,23-130,83-2,42,35,72,70,86,49,20,106,18,157,5a165.625,165.625,0,0,0,120,0c47,94,178,113,251,33,61.112,8.015,113.854-5.72,150.492-29.764a165.62,165.62,0,0,0,110.861-3.236c47,94,178,113,251,33,31.385,4.116,60.563,2.495,86.487-3.311,25.924,5.806,55.1,7.427,86.488,3.311,73,80,204,61,251-33a165.625,165.625,0,0,0,120,0c51,13,108,15,157-5a147.188,147.188,0,0,0,33.5-18.694,147.217,147.217,0,0,0,33.5,18.694c49,20,106,18,157,5a165.625,165.625,0,0,0,120,0c47,94,178,113,251,33C2446.709,1093.793,2554.709,922.793,2379.709,863.793Z" transform="translate(142.69 -634.312)" fill="#eee"/>
+  </svg>
+
+</div>
+
+
+
