@@ -161,8 +161,8 @@
 
   .terminal {
     position: relative;
-    width: 80%;
-    max-width: 600px;
+    width: 100%;
+    max-width: 1500px;
     border-radius: 6px;
     padding-top: 45px;
     margin-top: 8px;
@@ -355,7 +355,7 @@
 <div>  
       &nbsp;      
 </div>
-  
+
 <div class="card highlight-card card-medium">
   <h2>
     DL's of PCX Teams
@@ -437,6 +437,394 @@
       <pre *ngSwitchCase="'pdh'">Lst-Technology.PES.PDH.Support@nike.com</pre>
       <pre *ngSwitchCase="'foundation'">Lst-GT.Create.PD.Foundation.Technocrats@nike.com</pre>
   </div>
+
+  <div>  
+    &nbsp;      
+  </div>
+
+  <div class="card highlight-card card-medium">
+    <h2>
+      Important SQL Queries
+    </h2>
+  </div>
+  
+    <input type="hidden" #selection>
+  
+    <div class="card-container"  style="font-style: italic; font: bolder;">
+      <div class="card card-medium" (click)="selection.value = 'fw1'" tabindex="0">
+        <span>FWPDM PCC-SR</span>
+      </div>
+  
+      <div class="card card-medium" (click)="selection.value = 'fw2'" tabindex="0">
+        <span>PDM# not in PCX</span>
+      </div>
+  
+      <div class="card card-medium" (click)="selection.value = 'pcx1'" tabindex="0">
+        <span>PCX query for DPC Team</span>
+      </div>
+  
+      <div class="card card-medium" (click)="selection.value = 'pcx2'" tabindex="0">
+        <span>Dev Team mapping</span>
+      </div>
+
+      <div class="card card-medium" (click)="selection.value = 'pcx3'" tabindex="0">
+        <span>FW Dev Style Flex Type values</span>
+      </div>
+
+      <div class="card card-medium" (click)="selection.value = 'pcx4'" tabindex="0">
+        <span>Query1 APPDM Long Desc</span>
+      </div>
+
+      <div class="card card-medium" (click)="selection.value = 'pcx5'" tabindex="0">
+        <span>Query2 APPDM Long Desc</span>
+      </div>
+    </div>
+  
+    <!-- Terminal -->
+    <div class="terminal" [ngSwitch]="selection.value">
+        <pre *ngSwitchDefault></pre>
+        <pre *ngSwitchCase="'fw1'">
+          SELECT DISTINCT
+            M.MODELIDENTIFIER AS "Model ID",
+            M.NAME AS "Model Name",    
+            LS.STYLENUMBER AS "PCX Dev Style Number",
+            B.PCXDEVCOLORWAYID AS "PCX Dev Colorway ID",
+            B.MATERIALVERSION as "Material Version",    
+            B.PCXBOMID AS "PCX BOM ID",
+            DS.ALIAS AS "PCM DPA",
+            B.FWPCMBOMID AS "PCM BOM ID",
+            CY.ABBREVIATION AS "Season",
+            F.FACTORY AS "PCC",
+            U.NAME AS "PCC DEVELOPER NTID",
+            U.FULLNAME AS "PCC DEVELOPER"    
+          FROM
+            WCADMIN.FWDEVELOPMENTSTREAM DS,
+            WCADMIN.FWBOM B,
+            WCADMIN.FWBOMPRODUCTLINK BPL,
+            WCADMIN.FWPRODUCT P, 
+            WCADMIN.FWLEGACYSTYLE LS,
+            WCADMIN.FWDEVSTREAMFACTORYRESOURCE DSF,
+            WCADMIN.FWFACTORY FWF,
+            WCADMIN.FACTORY F,
+            WCADMIN.FWCYCLEYEAR CY,
+            WCADMIN.FWMODEL M,
+            WCADMIN.ROLEPRINCIPALMAP RPM,
+            WCADMIN.TEAM T,
+            WCADMIN.WTUSER U
+          WHERE
+            DS.IDA2A2 = B.IDA3B9
+            AND B.IDA2A2 = BPL.IDA3A5
+            AND BPL.IDA3B5 = P.IDA2A2
+            AND P.IDA3K9 = LS.IDA2A2
+            AND P.IDA3L9 = CY.IDA2A2
+            AND DS.IDA2A2 = DSF.IDA3A5
+            AND DSF.IDA3B5 = FWF.IDA2A2
+            AND FWF.IDA3A5 = F.IDA2A2
+            AND P.IDA3B9 = M.IDA2A2    
+            AND RPM.IDA3A4 = T.IDA2A2 
+            AND T.IDA2A2 = DS.IDA3TEAMID
+            AND RPM.IDA3B4 = U.IDA2A2(+) 
+            AND RPM.ROLE = 'FWPCCDEVELOPER'
+            AND DSF.FACTORYTYPE = 'DEV'
+            AND CY.ABBREVIATION IN ('SU20', 'FA20', 'HO20', 'SP21')
+            AND F.FACTORY IN ('T2','VT');
+          </pre>
+          <pre *ngSwitchCase="'fw2'">
+            In this case, as all the material were created after 24-Oct-2019. 
+            We have updated the lastprocessedtimestamp date to 24-Oct-2019 in wcadmin.fwcontroltable in FWPDM database. 
+            After which they were processed and PDM Material # is sent to PDH for all the materials created after 24-Oct.
+
+            For other cases, where materials created are old and PDM Material # are not integrated with PDH, 
+            please follow below steps for the same.
+            
+            1.	Check and NOTE the createstampa2 of material in FWPDM which have not integrated with PDH. 
+            Query below:
+            select pcxmaterialidentifier,wtpartnumber,createstampa2 
+            from wcadmin.fwmaterialmaster where pcxmaterialidentifier in (191269);
+            
+            2.	Update createstampa2 of material to sysdate:
+            update wcadmin.fwmaterialmaster set createstampa2=sysdate + interval '8' hour  
+            where pcxmaterialidentifier in (191269);
+            
+            3.	Check if Legacy PDM # has integrated with PDH. 
+            If yes, again set the createstampa2 of material to original as noted in first step.
+            update wcadmin.fwmaterialmaster set createstampa2=to_date('23-OCT-19 10.18.23 PM', 'dd-mon-yyyy HH.MI.ss AM') 
+            where pcxmaterialidentifier=191269;
+            
+            Please check and let me know in case more information is required.
+            
+            Missed the important point:
+            
+            We are updating the createstampa2 of material as on only material create event based on material create 
+            timestamp(comparing with lastprocessedtimestamp in fwcontroltable) legacy PDM # is sent to PDH.
+            
+            On update event legacy PDM # is not sent to PDH from PDM. 
+            Also PCX does not send legacy PDM # to PDH on create/update event in the payloads.</pre>
+          <pre *ngSwitchCase="'pcx1'">
+          SELECT DISTINCT
+            devstyle.ptc_str_15typeinfolcsproduct            AS "Model ID",
+            devstyle.ptc_str_17typeinfolcsproduct            AS "Model Name",
+            devstyle.ptc_str_32typeinfolcsproduct            AS "Dev Style number",
+            devstyle.ptc_str_20typeinfolcsproduct            AS "Marketing Name",
+            colorway.ptc_lng_1typeinfolcssku                 AS "Colorway ID",
+            colorway.ptc_str_1typeinfolcssku                 AS "Colorway Name",
+            upper(skuseasonlink.ptc_str_13typeinfolcsskuseas) AS "Product C/O Status",
+            upper(colorway.ptc_str_2typeinfolcssku) AS "Dev Colorway State",
+            upper(colorway.ptc_str_19typeinfolcssku) AS "Dev Colorway Gate",
+            season.ptc_str_4typeinfolcsseason                AS "Season",
+            upper(devstyle.ptc_str_10typeinfolcsproduct) AS "Gender",
+            upper(ptc_str_2typeinfolcsproduct) AS "Age",
+            upper(devstyle.ptc_str_12typeinfolcsproduct) AS "Sports Activity",
+            productseasonlink.ptc_str_14typeinfolcsproduct   AS "Development Team",
+            (
+                SELECT
+                    lcslifecyclemanaged.ptc_str_10typeinfolcslifecyc
+                FROM
+                    manrev.lcslifecyclemanaged lcslifecyclemanaged
+                WHERE
+                    productseasonlink.ida3a2typeinfolcsproductseas = lcslifecyclemanaged.ida2a2
+            ) AS "TD Code",
+            supplier.ptc_str_24typeinfolcssupplie            AS "PCC",
+            supplier.ptc_str_60typeinfolcssupplie            AS "Factory Group",
+            sourcingconfig.ptc_str_2typeinfolcssourcing      AS "Primary Source"
+          FROM
+            manrev.lcsproduct devstyle,
+            manrev.lcsproductseasonlink productseasonlink,
+            manrev.lcssku colorway,
+            manrev.lcsseason season,
+            manrev.lcsskuseasonlink skuseasonlink,
+            manrev.lcssourcingconfig sourcingconfig,
+            manrev.lcssourcetoseasonlink sourcetoseasonlink,
+            manrev.lcssupplier supplier
+          WHERE
+            season.ptc_str_4typeinfolcsseason IN (
+                'Footwear-SP20',
+                'Footwear-SU20',
+                'Footwear-FA20',
+                'Footwear-HO20',
+                'Footwear-SP21',
+                'Footwear-SU21',
+                'Footwear-FA21',
+                'Footwear-HO21',
+                'Footwear-SP22'
+            )
+            AND sourcetoseasonlink.ptc_bln_1typeinfolcssourceto = 1 --Only Primary Source (Season)
+            AND upper(colorway.ptc_str_13typeinfolcssku) = 'ACTIVE'--Only active Colorways
+            AND devstyle.ida3masterreference = colorway.ida3a12
+            AND devstyle.flextypeidpath = '\49742\250384\250572\69159615' -- FW Dev Styles
+            --AND devstyle.flextypeidpath = '\49742\250384\250572\69159185' -- Construction Option Dev Styles   
+            --AND devstyle.flextypeidpath = '\49742\250384\250572\69159400' -- Promo Dev Styles
+            --AND skuseasonlink.ptc_str_13typeInfoLCSSKUSeas = 'new'
+            AND devstyle.ida3masterreference = productseasonlink.productmasterid
+            AND devstyle.ida3masterreference = skuseasonlink.productmasterid
+            AND colorway.branchiditerationinfo = skuseasonlink.skuarevid
+            AND colorway.ida3masterreference = skuseasonlink.skumasterid
+            AND productseasonlink.seasonrevid = season.branchiditerationinfo
+            AND productseasonlink.ida3b5 = season.ida3masterreference
+            AND productseasonlink.ida3b5 = skuseasonlink.ida3b5
+            AND productseasonlink.productmasterid = skuseasonlink.productmasterid
+            AND skuseasonlink.ida3b5 = season.ida3masterreference
+            AND skuseasonlink.seasonrevid = season.branchiditerationinfo
+            AND devstyle.ida3masterreference = sourcingconfig.ida3c11
+            AND devstyle.branchiditerationinfo = sourcingconfig.productarevid
+            AND sourcetoseasonlink.seasonmasterid = season.ida3masterreference
+            AND sourcetoseasonlink.seasonmasterid = skuseasonlink.ida3b5
+            AND supplier.branchiditerationinfo = sourcetoseasonlink.branchida3b2typeinfolcssourc
+            AND sourcetoseasonlink.sourcingconfigmasterid = sourcingconfig.ida3masterreference
+            AND productseasonlink.ida3a2typeinfolcsproductseas IN (
+                14342608,--F1
+                14342631,--F2
+                14342651,--F3
+                14342674--F4
+            )--TD Code (add if required N1-14342353, N2-14342369, N3-14342389)
+            /*AND supplier.ptc_str_60typeinfolcssupplie IN (
+                'POU CHEN',
+                'FENG TAY',
+                'TAE KWANG',
+                'CHANG SHIN'
+            )*/
+            AND colorway.ptc_lng_1typeinfolcssku <> 0
+            AND devstyle.latestiterationinfo = 1
+            AND devstyle.versionida2versioninfo = 'A'
+            AND colorway.latestiterationinfo = 1
+            AND colorway.versionida2versioninfo = 'A'
+            AND season.latestiterationinfo = 1
+            AND season.versionida2versioninfo = 'A'
+            AND productseasonlink.seasonrevid = season.branchiditerationinfo
+            AND devstyle.ida3masterreference = sourcingconfig.ida3c11
+            AND devstyle.branchiditerationinfo = sourcingconfig.productarevid
+            AND sourcingconfig.latestiterationinfo = 1
+            AND sourcingconfig.versionida2versioninfo = 'A'
+            AND productseasonlink.effectlatest = 1
+            AND skuseasonlink.effectlatest = 1
+            AND sourcetoseasonlink.latestiterationinfo = 1
+            AND sourcetoseasonlink.versionida2versioninfo = 'A'
+            AND supplier.latestiterationinfo = 1
+            AND supplier.versionida2versioninfo = 'A'
+          ORDER BY
+            season.ptc_str_4typeinfolcsseason,
+            devstyle.ptc_str_15typeinfolcsproduct,
+            devstyle.ptc_str_32typeinfolcsproduct,
+            colorway.ptc_lng_1typeinfolcssku;</pre>
+          <pre *ngSwitchCase="'pcx2'">
+          SELECT
+            lwsmastenum.name,
+            lwcenumentry.name,
+            localize.value
+          FROM
+            manrev.lwcenumerationentry lwcenumentry,
+            manrev.lwclocalizablepropertyvalue localize,
+            manrev.lwcmasterenumerationdefinition lwsmastenum
+          WHERE
+            lwsmastenum.ida2a2 = localize.ida3c4
+            AND localize.ida3b4 = lwcenumentry.ida2a2
+            AND lwsmastenum.name = 'nikeDevelopmentTeamFW'
+          ORDER BY
+            lwcenumentry.name,
+            localize.value;
+          </pre>
+          <pre *ngSwitchCase="'pcx3'">
+
+              Flex Type = \49742\250384\250572\69159615  --- FW STYLENUMBER
+              Flex Type = \49742\250384\250572\69159185  --- Construction Option
+              Flex Type = \49742\250384\250572\69159400  --- Promo
+          </pre>
+          <pre *ngSwitchCase="'pcx4'">
+            WITH HIER_DEF_PATH_SUPMAT AS (SELECT DISTINCT 
+            TAB.HIER_PATH
+            ,REPLACE(TAB.HIER_DISPLAY_PATH,'\\','') AS HIERARCHY_DISPLAY_PATH
+            ,REGEXP_REPLACE(TAB.HIER_PATH_NAME,'\\',NULL,1,1) AS HIER_PATH_NAME
+            ,'rem_MsApPdmSmLongDesc' AS SM_MAPPINGTAB
+            ,'rem_ApPdmLongDesc' AS MAT_MAPPINGTAB
+            ,NULL AS PDM_LONGDESC
+            FROM (
+            SELECT (a.IDA3MASTERREFERENCE+1) as IDA3MASTERREFERENCE
+            ,INSTANTIABLE 
+            ,LEVEL
+            ,SYS_CONNECT_BY_PATH(a.IDA3MASTERREFERENCE+1, '\') AS HIER_PATH
+            ,SYS_CONNECT_BY_PATH(regexp_substr(REPLACE(REGEXP_SUBSTR(a.HIERARCHYDISPLAYNAMEKEY,'[^$]+',1,1),'.',' '),'\S+$'), '\') AS HIER_PATH_NAME 
+            ,SYS_CONNECT_BY_PATH(a.HIER_DISP_NAME1, '\') AS HIER_DISPLAY_PATH 
+            ,a.DISPLAYNAMEKEY 
+            ,a.HIERARCHYDISPLAYNAMEKEY
+            FROM (SELECT wtd.IDA2A2
+            ,wtd.IDA3PARENTREFERENCE
+            ,wtd.IDA3MASTERREFERENCE
+            ,wtd.INSTANTIABLE
+            ,wtdm.DISPLAYNAMEKEY 
+            ,wtdm.HIERARCHYDISPLAYNAMEKEY
+            ,wtdm.HIER_DISP_NAME1
+            FROM manrev.WTTYPEDEFINITION wtd 
+            INNER JOIN ( 
+            SELECT 
+            wtdm1.IDA2A2
+            ,wtdm1.DISPLAYNAMEKEY 
+            ,wtdm1.HIERARCHYDISPLAYNAMEKEY
+            ,HDNAME.HIER_DISP_NAME1
+            FROM manrev.WTTYPEDEFINITIONMASTER wtdm1 
+            LEFT OUTER JOIN (select TYPE_DEF.name as HIERARCHYDISPLAYNAMEKEY
+            ,LOC_PROP_VAL.VALUE AS HIER_DISP_NAME1
+            from manrev.LWCTYPEDEFINITION TYPE_DEF
+            INNER JOIN manrev.LWCLOCALIZABLEPROPERTYVALUE LOC_PROP_VAL ON TYPE_DEF.IDA2A2 = LOC_PROP_VAL.IDA3C4 and LOC_PROP_VAL.CLASSNAMEKEYC4 = 'com.ptc.core.lwc.server.LWCTypeDefinition'
+            and LOC_PROP_VAL.CLASSNAMEKEYA4 = 'com.ptc.core.lwc.server.LWCPropertyDefinition' and LOC_PROP_VAL.IDA3A4 = 2292) HDNAME ON HDNAME.HIERARCHYDISPLAYNAMEKEY = wtdm1.HIERARCHYDISPLAYNAMEKEY
+            ) wtdm 
+            on wtdm.IDA2A2 = wtd.IDA3MASTERREFERENCE
+            WHERE wtd.LATESTITERATIONINFO = 1
+            ) a
+            WHERE level <= 20 
+            START WITH a.IDA3PARENTREFERENCE = 0
+            CONNECT BY NOCYCLE PRIOR a.IDA2A2 = a.IDA3PARENTREFERENCE AND LEVEL <= 20) TAB
+            WHERE REPLACE(TAB.HIER_DISPLAY_PATH,'\\','') LIKE 'Nike\Apparel%'
+            )
+            SELECT DISTINCT 
+            HIER_DEF_PATH.SM_MAPPINGTAB AS MAPPINGTAB
+            ,LCSMATERIAL.PTC_LNG_1TYPEINFOLCSMATERIAL AS PDM_MATERIAL_NUMBER /* NikeLegacyCode NEED_COLUMN_UPDATE_CHECK */
+            ,LCSSUPPLIER.PTC_STR_37TYPEINFOLCSSUPPLIE as SUPPLIER_LOCATION_CODE /* NikeLegacyCode NEED_COLUMN_UPDATE_CHECK */
+            ,HIER_DEF_PATH.PDM_LONGDESC
+            ,HIER_DEF_PATH.HIER_PATH_NAME
+            FROM MANREV.LCSMATERIALSUPPLIER@PTCFLEX
+            INNER JOIN MANREV.LCSMATERIALSUPPLIERMASTER@PTCFLEX ON LCSMATERIALSUPPLIER.IDA3MASTERREFERENCE = LCSMATERIALSUPPLIERMASTER.IDA2A2
+            INNER JOIN MANREV.LCSMATERIAL@PTCFLEX ON LCSMATERIAL.IDA3MASTERREFERENCE = LCSMATERIALSUPPLIERMASTER.IDA3A6
+            INNER JOIN MANREV.LCSMATERIALMASTER@PTCFLEX ON LCSMATERIALMASTER.IDA2A2 = LCSMATERIAL.IDA3MASTERREFERENCE
+            INNER JOIN MANREV.LCSSUPPLIERMASTER@PTCFLEX ON LCSSUPPLIERMASTER.IDA2A2 = LCSMATERIALSUPPLIERMASTER.IDA3B6
+            INNER JOIN MANREV.LCSSUPPLIER@PTCFLEX ON LCSSUPPLIERMASTER.IDA2A2 = LCSSUPPLIER.IDA3MASTERREFERENCE
+            INNER JOIN HIER_DEF_PATH_SUPMAT HIER_DEF_PATH ON HIER_DEF_PATH.HIER_PATH = LCSMATERIAL.FLEXTYPEIDPATH
+            WHERE LCSMATERIALSUPPLIER.LATESTITERATIONINFO = 1 
+            AND LCSMATERIAL.LATESTITERATIONINFO = 1 
+            AND LCSMATERIALSUPPLIERMASTER.PLACEHOLDER = 0
+            AND LCSSUPPLIERMASTER.PLACEHOLDER = 0 
+            AND LCSSUPPLIER.LATESTITERATIONINFO = 1
+            AND LCSMATERIALSUPPLIER.STATECHECKOUTINFO = 'c/i'
+            AND LCSMATERIAL.STATECHECKOUTINFO = 'c/i'
+            AND LCSMATERIALSUPPLIER.PTC_LNG_30TYPEINFOLCSMATERIA IN (406171);
+          </pre>
+          <pre *ngSwitchCase="'pcx5'">
+            WITH HIER_DEF_PATH_SUPMAT AS (SELECT DISTINCT 
+            TAB.HIER_PATH
+            ,REPLACE(TAB.HIER_DISPLAY_PATH,'\\','') AS HIERARCHY_DISPLAY_PATH
+            ,REGEXP_REPLACE(TAB.HIER_PATH_NAME,'\\',NULL,1,1) AS HIER_PATH_NAME
+            ,'rem_MsApPdmSmLongDesc' AS SM_MAPPINGTAB
+            ,'rem_ApPdmLongDesc' AS MAT_MAPPINGTAB
+            ,NULL AS PDM_LONGDESC
+            FROM (
+            SELECT (a.IDA3MASTERREFERENCE+1) as IDA3MASTERREFERENCE
+            ,INSTANTIABLE 
+            ,LEVEL
+            ,SYS_CONNECT_BY_PATH(a.IDA3MASTERREFERENCE+1, '\') AS HIER_PATH
+            ,SYS_CONNECT_BY_PATH(regexp_substr(REPLACE(REGEXP_SUBSTR(a.HIERARCHYDISPLAYNAMEKEY,'[^$]+',1,1),'.',' '),'\S+$'), '\') AS HIER_PATH_NAME 
+            ,SYS_CONNECT_BY_PATH(a.HIER_DISP_NAME1, '\') AS HIER_DISPLAY_PATH 
+            ,a.DISPLAYNAMEKEY 
+            ,a.HIERARCHYDISPLAYNAMEKEY
+            FROM (SELECT wtd.IDA2A2
+            ,wtd.IDA3PARENTREFERENCE
+            ,wtd.IDA3MASTERREFERENCE
+            ,wtd.INSTANTIABLE
+            ,wtdm.DISPLAYNAMEKEY 
+            ,wtdm.HIERARCHYDISPLAYNAMEKEY
+            ,wtdm.HIER_DISP_NAME1
+            FROM MANREV.WTTYPEDEFINITION wtd 
+            INNER JOIN ( 
+            SELECT 
+            wtdm1.IDA2A2
+            ,wtdm1.DISPLAYNAMEKEY 
+            ,wtdm1.HIERARCHYDISPLAYNAMEKEY
+            ,HDNAME.HIER_DISP_NAME1
+            FROM MANREV.WTTYPEDEFINITIONMASTER wtdm1 
+            LEFT OUTER JOIN (select TYPE_DEF.name as HIERARCHYDISPLAYNAMEKEY
+            ,LOC_PROP_VAL.VALUE AS HIER_DISP_NAME1
+            from MANREV.LWCTYPEDEFINITION TYPE_DEF
+            INNER JOIN MANREV.LWCLOCALIZABLEPROPERTYVALUE LOC_PROP_VAL ON TYPE_DEF.IDA2A2 = LOC_PROP_VAL.IDA3C4 and LOC_PROP_VAL.CLASSNAMEKEYC4 = 'com.ptc.core.lwc.server.LWCTypeDefinition'
+            and LOC_PROP_VAL.CLASSNAMEKEYA4 = 'com.ptc.core.lwc.server.LWCPropertyDefinition' and LOC_PROP_VAL.IDA3A4 = 2292) HDNAME ON HDNAME.HIERARCHYDISPLAYNAMEKEY = wtdm1.HIERARCHYDISPLAYNAMEKEY
+            ) wtdm 
+            on wtdm.IDA2A2 = wtd.IDA3MASTERREFERENCE
+            WHERE wtd.LATESTITERATIONINFO = 1
+            ) a
+            WHERE level <= 20 
+            START WITH a.IDA3PARENTREFERENCE = 0
+            CONNECT BY NOCYCLE PRIOR a.IDA2A2 = a.IDA3PARENTREFERENCE AND LEVEL <= 20) TAB
+            WHERE REPLACE(TAB.HIER_DISPLAY_PATH,'\\','') LIKE 'Nike\Apparel%'
+            )  
+            SELECT DISTINCT 
+            HIER_DEF_PATH.MAT_MAPPINGTAB AS MAPPINGTAB
+            ,LCSMATERIAL.PTC_LNG_1TYPEINFOLCSMATERIAL AS PDM_MATERIAL_NUMBER /* NikeLegacyCode NEED_COLUMN_UPDATE_CHECK */
+            ,HIER_DEF_PATH.PDM_LONGDESC
+            ,HIER_DEF_PATH.HIER_PATH_NAME
+            FROM MANREV.LCSMATERIALSUPPLIER@PTCFLEX
+            INNER JOIN MANREV.LCSMATERIALSUPPLIERMASTER@PTCFLEX ON LCSMATERIALSUPPLIER.IDA3MASTERREFERENCE = LCSMATERIALSUPPLIERMASTER.IDA2A2
+            INNER JOIN MANREV.LCSMATERIAL@PTCFLEX ON LCSMATERIAL.IDA3MASTERREFERENCE = LCSMATERIALSUPPLIERMASTER.IDA3A6
+            INNER JOIN MANREV.LCSMATERIALMASTER@PTCFLEX ON LCSMATERIALMASTER.IDA2A2 = LCSMATERIAL.IDA3MASTERREFERENCE
+            INNER JOIN MANREV.LCSSUPPLIERMASTER@PTCFLEX ON LCSSUPPLIERMASTER.IDA2A2 = LCSMATERIALSUPPLIERMASTER.IDA3B6
+            INNER JOIN MANREV.LCSSUPPLIER@PTCFLEX ON LCSSUPPLIERMASTER.IDA2A2 = LCSSUPPLIER.IDA3MASTERREFERENCE
+            INNER JOIN HIER_DEF_PATH_SUPMAT HIER_DEF_PATH ON HIER_DEF_PATH.HIER_PATH = LCSMATERIAL.FLEXTYPEIDPATH
+            WHERE LCSMATERIALSUPPLIER.LATESTITERATIONINFO = 1 
+            AND LCSMATERIAL.LATESTITERATIONINFO = 1 
+            AND LCSMATERIALSUPPLIERMASTER.PLACEHOLDER = 0
+            AND LCSSUPPLIERMASTER.PLACEHOLDER = 0 
+            AND LCSSUPPLIER.LATESTITERATIONINFO = 1
+            and LCSMATERIALSUPPLIER.STATECHECKOUTINFO = 'c/i'
+            and LCSMATERIAL.STATECHECKOUTINFO = 'c/i'
+            AND LCSMATERIALSUPPLIER.PTC_LNG_30TYPEINFOLCSMATERIA IN (406171);
+          </pre>
+    </div>
 
   <svg id="clouds" alt="Gray Clouds Background" xmlns="http://www.w3.org/2000/svg" width="2611.084" height="485.677" viewBox="0 0 2611.084 485.677">
     <path id="Path_39" data-name="Path 39" d="M2379.709,863.793c10-93-77-171-168-149-52-114-225-105-264,15-75,3-140,59-152,133-30,2.83-66.725,9.829-93.5,26.25-26.771-16.421-63.5-23.42-93.5-26.25-12-74-77-130-152-133-39-120-212-129-264-15-54.084-13.075-106.753,9.173-138.488,48.9-31.734-39.726-84.4-61.974-138.487-48.9-52-114-225-105-264,15a162.027,162.027,0,0,0-103.147,43.044c-30.633-45.365-87.1-72.091-145.206-58.044-52-114-225-105-264,15-75,3-140,59-152,133-53,5-127,23-130,83-2,42,35,72,70,86,49,20,106,18,157,5a165.625,165.625,0,0,0,120,0c47,94,178,113,251,33,61.112,8.015,113.854-5.72,150.492-29.764a165.62,165.62,0,0,0,110.861-3.236c47,94,178,113,251,33,31.385,4.116,60.563,2.495,86.487-3.311,25.924,5.806,55.1,7.427,86.488,3.311,73,80,204,61,251-33a165.625,165.625,0,0,0,120,0c51,13,108,15,157-5a147.188,147.188,0,0,0,33.5-18.694,147.217,147.217,0,0,0,33.5,18.694c49,20,106,18,157,5a165.625,165.625,0,0,0,120,0c47,94,178,113,251,33C2446.709,1093.793,2554.709,922.793,2379.709,863.793Z" transform="translate(142.69 -634.312)" fill="#eee"/>
