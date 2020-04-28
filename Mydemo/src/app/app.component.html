@@ -270,7 +270,7 @@
 
   <div class="card-container">
     <a class="card" target="_blank" rel="noopener" href="https://ptc-pcx-prod.pes-prod.nike.com/Windchill/rfa/jsp/main/Main.jsp">
-      <img src="assets/images/pcx.png" alt="logo" style="width: 70px; height: 70px;">   
+      <img src="assets/images/pcx1.png" alt="logo" style="width: 170px; height: 60px;">   
     </a>
     
     <a class="card" target="_blank" rel="noopener" href="https://confluence.nike.com/display/PAS/Product+Development">
@@ -285,8 +285,30 @@
         <img src="assets/images/aws.png" alt="logo" style="width: 150px; height: 60px;">
     </a>
 
+      
+
+    <!--<a class="card" target="_blank" rel="noopener" href="https://blogs.nike.com/pcx/training-support/">
+        <img src="assets/images/pcxtraining.png" alt="logo" style="width: 188px; height: 60px;">
+    </a>-->
+
+    <a class="card" target="_blank" rel="noopener" href="https://ptc-pcx-training-flex11.pes-preprod.nike.com/Windchill/rfa/jsp/main/Main.jsp">
+      <img src="assets/images/pcxtrainingenv.png" alt="logo" style="width: 170px; height: 60px;">   
+    </a>
+    
+    <a class="card" target="_blank" rel="noopener" href="https://ptc-pcx-stg.pes-preprod.nike.com/Windchill/rfa/jsp/main/Main.jsp">
+      <img src="assets/images/staging.png" alt="logo" style="width: 150px; height: 70px;">   
+    </a>
+    
+    <a class="card" target="_blank" rel="noopener" href="https://ptc-pcx-devsc.pes-preprod.nike.com/Windchill/rfa/jsp/main/Main.jsp">
+      <img src="assets/images/devsc.jpg" alt="logo" style="width: 150px; height: 60px;">   
+    </a>
+    
+    <a class="card" target="_blank" rel="noopener" href="https://ptc-pcx-prod-replica.pes-preprod.nike.com/Windchill/rfa/jsp/login/loginRedirect.jsp">
+      <img src="assets/images/bizsim.png" alt="logo" style="width: 150px; height: 70px;">   
+    </a>
+    
     <a class="card" target="_blank" rel="noopener" href="https://nike.ent.box.com/folder/48198435292">
-        <img src="assets/images/box.png" alt="logo" style="width: 150px; height: 60px;">
+      <img src="assets/images/box.png" alt="logo" style="width: 150px; height: 60px;">
     </a>
 
     <a class="card" target="_blank" rel="noopener" href="https://ptc-pcx-prod.crtyovkh64ot.us-west-2.rds.amazonaws.com:8080/em/shell#/dbhome/show_regions">
@@ -295,12 +317,8 @@
     </a>
 
     <a class="card" target="_blank" rel="noopener" href="https://prod-parc-app-dashboard.pes-prod.nike.com/#">
-        <img src="assets/images/parc.png" alt="logo" style="width: 140px; height: 60px;">
-    </a>    
-
-    <a class="card" target="_blank" rel="noopener" href="https://blogs.nike.com/pcx/training-support/">
-        <img src="assets/images/pcxtraining.png" alt="logo" style="width: 190px; height: 60px;">
-    </a>
+        <img src="assets/images/parc1.png" alt="logo" style="width: 140px; height: 60px;">
+    </a>  
   </div>
 <div class="row">
   <div class="col-span-12">
@@ -442,6 +460,10 @@
     &nbsp;      
   </div>
 
+  <div>  
+    &nbsp;      
+  </div>
+
   <div class="card highlight-card card-medium">
     <h2>
       Important SQL Queries
@@ -451,12 +473,16 @@
     <input type="hidden" #selection>
   
     <div class="card-container"  style="font-style: italic; font: bolder;">
+      <div class="card card-medium" (click)="selection.value = 'pcx4'" tabindex="0">
+        <span>Query1 APPDM Long Desc</span>
+      </div>
+
+      <div class="card card-medium" (click)="selection.value = 'pcx5'" tabindex="0">
+        <span>Query2 APPDM Long Desc</span>
+      </div>
+
       <div class="card card-medium" (click)="selection.value = 'fw1'" tabindex="0">
         <span>FWPDM PCC-SR</span>
-      </div>
-  
-      <div class="card card-medium" (click)="selection.value = 'fw2'" tabindex="0">
-        <span>PDM# not in PCX</span>
       </div>
   
       <div class="card card-medium" (click)="selection.value = 'pcx1'" tabindex="0">
@@ -469,14 +495,6 @@
 
       <div class="card card-medium" (click)="selection.value = 'pcx3'" tabindex="0">
         <span>FW Dev Style Flex Type values</span>
-      </div>
-
-      <div class="card card-medium" (click)="selection.value = 'pcx4'" tabindex="0">
-        <span>Query1 APPDM Long Desc</span>
-      </div>
-
-      <div class="card card-medium" (click)="selection.value = 'pcx5'" tabindex="0">
-        <span>Query2 APPDM Long Desc</span>
       </div>
     </div>
   
@@ -529,37 +547,6 @@
             AND CY.ABBREVIATION IN ('SU20', 'FA20', 'HO20', 'SP21')
             AND F.FACTORY IN ('T2','VT');
           </pre>
-          <pre *ngSwitchCase="'fw2'">
-            In this case, as all the material were created after 24-Oct-2019. 
-            We have updated the lastprocessedtimestamp date to 24-Oct-2019 in wcadmin.fwcontroltable in FWPDM database. 
-            After which they were processed and PDM Material # is sent to PDH for all the materials created after 24-Oct.
-
-            For other cases, where materials created are old and PDM Material # are not integrated with PDH, 
-            please follow below steps for the same.
-            
-            1.	Check and NOTE the createstampa2 of material in FWPDM which have not integrated with PDH. 
-            Query below:
-            select pcxmaterialidentifier,wtpartnumber,createstampa2 
-            from wcadmin.fwmaterialmaster where pcxmaterialidentifier in (191269);
-            
-            2.	Update createstampa2 of material to sysdate:
-            update wcadmin.fwmaterialmaster set createstampa2=sysdate + interval '8' hour  
-            where pcxmaterialidentifier in (191269);
-            
-            3.	Check if Legacy PDM # has integrated with PDH. 
-            If yes, again set the createstampa2 of material to original as noted in first step.
-            update wcadmin.fwmaterialmaster set createstampa2=to_date('23-OCT-19 10.18.23 PM', 'dd-mon-yyyy HH.MI.ss AM') 
-            where pcxmaterialidentifier=191269;
-            
-            Please check and let me know in case more information is required.
-            
-            Missed the important point:
-            
-            We are updating the createstampa2 of material as on only material create event based on material create 
-            timestamp(comparing with lastprocessedtimestamp in fwcontroltable) legacy PDM # is sent to PDH.
-            
-            On update event legacy PDM # is not sent to PDH from PDM. 
-            Also PCX does not send legacy PDM # to PDH on create/update event in the payloads.</pre>
           <pre *ngSwitchCase="'pcx1'">
           SELECT DISTINCT
             devstyle.ptc_str_15typeinfolcsproduct            AS "Model ID",
