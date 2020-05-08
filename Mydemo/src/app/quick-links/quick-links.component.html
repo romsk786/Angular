@@ -25,272 +25,86 @@
     flex: 1;
   }
 
-  .toolbar {
-    height: 60px;
-    margin: -8px;
-    display: flex;
-    align-items: center;
-    background-color: rgb(49, 47, 47);
-    color: palegoldenrod;
-    font-weight: 600;
-  }
-
-  .toolbar img {
-    margin: 0 16px;
-  }
-
-  .toolbar #twitter-logo {
-    height: 40px;
-    margin: 0 16px;
-  }
-
-  .toolbar #twitter-logo:hover {
-    opacity: 0.8;
-  }
-
   .content {
     display: flex;
-    margin: 32px auto;
+    margin: 2px auto;
     padding: 0 16px;
-    max-width: 960px;
+    max-width: 3000px;
     flex-direction: column;
-    align-items: center;
+    align-items: left;
   }
 
-  svg.material-icons {
-    height: 24px;
-    width: auto;
-  }
-
-  svg.material-icons:not(:last-child) {
-    margin-right: 8px;
-  }
-
-  .card svg.material-icons path {
-    fill: coral;
-  }
-
-  .card-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-top: 16px;
-  }
-
-  .card {
-    border-radius: 3px;
-    border: 1px solid grey;
-    background-color: white ;
-    height: 40px;
-    width: 160px;
-    margin: 0 8px 16px;
-    padding: 16px;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    transition: all 0.2s ease-in-out;
-    line-height: 24px;
-  }
-
-  .card-container .card:not(:last-child) {
-    margin-right: 0;
-  }
-
-  .card.card-medium {
-    height: 25px;
-    width: 100px;
-  }
-  .card.card-small {
-    height: 10px;
-    width: 100px;
-  }
-
-  .card-container .card:not(.highlight-card) {
-    cursor: pointer;
-  }
-
-  .card-container .card:not(.highlight-card):hover {
-    transform: translateY(-3px);
-    box-shadow: 0 4px 17px rgba(black, 0.35);
-  }
-
-  .card-container .card:not(.highlight-card):hover .material-icons path {
-    fill: rgb(105, 103, 103);
-  }
-
-  .card.highlight-card {
-    background-color: palegoldenrod;
-    color: black;
-    font-weight: 600;
-    border: none;
-    width: auto;
-    min-width: 30%;
-    position: relative;
-  }
-
-  .card.card.highlight-card span {
-    margin-left: 60px;
-  }
-
-  svg#rocket {
-    width: 80px;
-    position: absolute;
-    left: -10px;
-    top: -24px;
-  }
-
-  svg#rocket-smoke {
-    height: 100vh;
-    position: absolute;
-    top: 10px;
-    right: 180px;
-    z-index: -10;
-  }
-
-  a,
-  a:visited,
-  a:hover {
-    color: #1976d2;
-    text-decoration: none;
-  }
-
-  a:hover {
-    color: #125699;
-  }
-
-  .terminal {
-    position: relative;
-    width: 100%;
-    max-width: 1500px;
-    border-radius: 6px;
-    padding-top: 45px;
-    margin-top: 8px;
-    overflow: hidden;
-    background-color: rgb(15, 15, 16);
-  }
-
-  .terminal::before {
-    content: "\2022 \2022 \2022";
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 4px;
-    background: rgb(58, 58, 58);
-    color: #c2c3c4;
-    width: 100%;
-    font-size: 2rem;
-    line-height: 0;
-    padding: 14px 0;
-    text-indent: 4px;
-  }
-
-  .terminal pre {
-    font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace;
-    color: white;
-    padding: 0 1rem 1rem;
-    margin: 0;
-  }
-
-  .circle-link {
-    height: 40px;
-    width: 40px;
-    border-radius: 40px;
-    margin: 8px;
-    background-color: white;
-    border: 1px solid #eeeeee;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-    transition: 1s ease-out;
-  }
-
-  .circle-link:hover {
-    transform: translateY(-0.25rem);
-    box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.2);
-  }
-
-  
-  svg#clouds {
-    position: fixed;
-    bottom: -160px;
-    left: -230px;
-    z-index: -10;
-    width: 1920px;
-  }
-
-
-  /* Responsive Styles */
-  @media screen and (max-width: 767px) {
-
-    .card-container > *:not(.circle-link) ,
-    .terminal {
-      width: 100%;
-    }
-
-    .card:not(.highlight-card) {
-      height: 16px;
-      margin: 8px 0;
-    }
-
-    .card.highlight-card span {
-      margin-left: 72px;
-    }
-
-    svg#rocket-smoke {
-      right: 120px;
-      transform: rotate(-5deg);
-    }
-  }
-
-  @media screen and (max-width: 575px) {
-    svg#rocket-smoke {
-      display: none;
-      visibility: hidden;
-    }
-  }
 </style>
 
-
-<p style="text-align: center; text-decoration: underline;">This page has the links to Confluence pages, token, relay etc..</p>
-
-<div class="card-container">
-    <a class="card" target="_blank" rel="noopener" href="https://confluence.nike.com/display/PAS/Splunk+Search+Criteria">  
-      <h2 style="color: black;font-size: small;text-align: center;">Splunk Search Criteria</h2> 
-    </a>
-    <a class="card" target="_blank" rel="noopener" href="https://confluence.nike.com/display/PAS/URL%27s+to+re-pull+PCX+Objects+for+FWPDM">  
-      <h2 style="color: black;font-size: small;text-align: center;">URL's to re-pull PCX Objects for FW PDM</h2> 
-    </a>
-    <a class="card" target="_blank" rel="noopener" href="https://confluence.nike.com/display/PAS/Incident+Knowledge+Base+-+PCX">  
-      <h2 style="color: black;font-size: small;text-align: center;">Incident Knowledge Base</h2> 
-    </a>
-    <a class="card" target="_blank" rel="noopener" href="https://confluence.nike.com/pages/viewpage.action?pageId=255535501">  
-      <h2 style="color: black;font-size: small;text-align: center;">Remove PDM Long Description</h2> 
-    </a>
-    <a class="card" target="_blank" rel="noopener" href="https://confluence.nike.com/display/PAS/How+to+use+Postman+to+verify+data+in+PDH">  
-      <h2 style="color: black;font-size: small;text-align: center;">Postman Information</h2> 
-    </a>
-    <a class="card" target="_blank" rel="noopener" href="https://confluence.nike.com/display/PAS/How+to+execute+PCX+Data+Collector+job">  
-      <h2 style="color: black;font-size: small;text-align: center;">PCX Data Collector Utility</h2> 
-    </a>
-    <a class="card" target="_blank" rel="noopener" href="https://confluence.nike.com/display/PAS/How+to+execute+PCX+Data+Publish+Utility">  
-      <h2 style="color: black;font-size: small;text-align: center;">PCX Data Publish Utility</h2> 
-    </a>
-    <a class="card" target="_blank" rel="noopener" href="https://confluence.nike.com/display/PAS/How+to+execute+PCX+Exchange+Rate+Utility">  
-      <h2 style="color: black;font-size: small;text-align: center;">PCX Exchange Rate Utility</h2> 
-    </a>
-    <a class="card" target="_blank" rel="noopener" href="https://confluence.nike.com/display/PAS/How+to+perform+Material+Reactivation">  
-      <h2 style="color: black;font-size: small;text-align: center;">Material Reactivation</h2> 
-    </a>
-    <a class="card" target="_blank" rel="noopener" href="https://token.niketech.com/#">  
-      <h2 style="color: black;font-size: small;text-align: center;">Token Generator</h2> 
-    </a>
-    <a class="card" target="_blank" rel="noopener" href="http://nke-lnx-pcs-p032:8080/ords/pcpubp1/f?p=103:1:5866081879950:::::">  
-      <h2 style="color: black;font-size: small;text-align: center;">PCX BOM Import Tool</h2> 
-    </a>
-    <a class="card" target="_blank" rel="noopener" href="https://nike.sharepoint.com/teams/na14/pes/SitePages/PCX%20Pages/Engineering%20and%20Technology%20Pages/Engineering%20and%20Technology%20-%20E%26T%20Team%20Documents.aspx">  
-      <h2 style="color: black;font-size: small;text-align: center;">Security Matrix</h2> 
-    </a>
+<div>
+  &nbsp;
 </div>
+<p style="text-align: center; text-decoration: underline;">This page has the links to Confluence pages, Token#, BOM Import tool, Security Matrix</p>
+
+<ul class="navbar-nav">
+  <li class="nav-item">
+    <a class="nav-link" target="_blank" rel="noopener" href="https://confluence.nike.com/display/PAS/Splunk+Search+Criteria">  
+      <p style="color: black;font-size: medium;">Splunk Search Criteria</p> 
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" target="_blank" rel="noopener" href="https://confluence.nike.com/display/PAS/URL%27s+to+re-pull+PCX+Objects+for+FWPDM">  
+      <p style="color: black;font-size: medium;">URL's to re-pull PCX Objects for FW PDM</p> 
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" target="_blank" rel="noopener" href="https://confluence.nike.com/display/PAS/Incident+Knowledge+Base+-+PCX">  
+      <p style="color: black;font-size: medium;">Incident Knowledge Base</p> 
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" target="_blank" rel="noopener" href="https://confluence.nike.com/pages/viewpage.action?pageId=255535501">  
+      <p style="color: black;font-size: medium;">Remove PDM Long Description</p> 
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" target="_blank" rel="noopener" href="https://confluence.nike.com/display/PAS/How+to+use+Postman+to+verify+data+in+PDH">  
+      <p style="color: black;font-size: medium;">Postman Information</p> 
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" target="_blank" rel="noopener" href="https://confluence.nike.com/display/PAS/How+to+execute+PCX+Data+Collector+job">  
+      <p style="color: black;font-size: medium;">PCX Data Collector Utility</p> 
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" target="_blank" rel="noopener" href="https://confluence.nike.com/display/PAS/How+to+execute+PCX+Data+Publish+Utility">  
+      <p style="color: black;font-size: medium;">PCX Data Publish Utility</p> 
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" target="_blank" rel="noopener" href="https://confluence.nike.com/display/PAS/How+to+execute+PCX+Exchange+Rate+Utility">  
+      <p style="color: black;font-size: medium;">PCX Exchange Rate Utility</p> 
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" target="_blank" rel="noopener" href="https://confluence.nike.com/display/PAS/How+to+perform+Material+Reactivation">  
+      <p style="color: black;font-size: medium;">Material Reactivation</p> 
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" target="_blank" rel="noopener" href="https://niketech.service-now.com/navpage.do">
+      <p style="color: black;font-size: medium;">SNOW</p> 
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" target="_blank" rel="noopener" href="https://token.niketech.com/#">  
+      <p style="color: black;font-size: medium;">Token Generator</p> 
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" target="_blank" rel="noopener" href="http://nke-lnx-pcs-p032:8080/ords/pcpubp1/f?p=103:1:5866081879950:::::">  
+      <p style="color: black;font-size: medium;">PCX BOM Import Tool</p> 
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" target="_blank" rel="noopener" href="https://nike.sharepoint.com/teams/na14/pes/SitePages/PCX%20Pages/Engineering%20and%20Technology%20Pages/Engineering%20and%20Technology%20-%20E%26T%20Team%20Documents.aspx">  
+      <p style="color: black;font-size: medium;">Security Matrix</p> 
+    </a>
+  </li>
+</ul>

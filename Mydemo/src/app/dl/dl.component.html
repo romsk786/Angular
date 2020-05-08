@@ -25,45 +25,13 @@
     flex: 1;
   }
 
-  .toolbar {
-    height: 60px;
-    margin: -8px;
-    display: flex;
-    align-items: center;
-    background-color: rgb(49, 47, 47);
-    color: palegoldenrod;
-    font-weight: 600;
-  }
-
-  .toolbar img {
-    margin: 0 16px;
-  }
-
-  .toolbar #twitter-logo {
-    height: 40px;
-    margin: 0 16px;
-  }
-
-  .toolbar #twitter-logo:hover {
-    opacity: 0.8;
-  }
-
   .content {
     display: flex;
-    margin: 32px auto;
-    padding: 0 16px;
-    max-width: 960px;
+    margin: 10px auto;
+    padding: 0 10px;
+    max-width: auto;
     flex-direction: column;
     align-items: center;
-  }
-
-  svg.material-icons {
-    height: 24px;
-    width: auto;
-  }
-
-  svg.material-icons:not(:last-child) {
-    margin-right: 8px;
   }
 
   .card svg.material-icons path {
@@ -133,36 +101,9 @@
     margin-left: 60px;
   }
 
-  svg#rocket {
-    width: 80px;
-    position: absolute;
-    left: -10px;
-    top: -24px;
-  }
-
-  svg#rocket-smoke {
-    height: 100vh;
-    position: absolute;
-    top: 10px;
-    right: 180px;
-    z-index: -10;
-  }
-
-  a,
-  a:visited,
-  a:hover {
-    color: #1976d2;
-    text-decoration: none;
-  }
-
-  a:hover {
-    color: #125699;
-  }
-
   .terminal {
     position: relative;
-    width: 100%;
-    max-width: 1500px;
+    width: 700px;
     border-radius: 6px;
     padding-top: 45px;
     margin-top: 8px;
@@ -212,16 +153,6 @@
     box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.2);
   }
 
-  
-  svg#clouds {
-    position: fixed;
-    bottom: -160px;
-    left: -230px;
-    z-index: -10;
-    width: 1920px;
-  }
-
-
   /* Responsive Styles */
   @media screen and (max-width: 767px) {
 
@@ -238,24 +169,18 @@
     .card.highlight-card span {
       margin-left: 72px;
     }
-
-    svg#rocket-smoke {
-      right: 120px;
-      transform: rotate(-5deg);
-    }
-  }
-
-  @media screen and (max-width: 575px) {
-    svg#rocket-smoke {
-      display: none;
-      visibility: hidden;
-    }
   }
 </style>
 
+<div>
+  &nbsp;
+</div>
 
-<p style="text-align: center; text-decoration: underline;">This page has the Distribution Lists of all the PCX Teams.</p>
+<p style="text-align: center; text-decoration: underline;">This page has the Distribution Lists of all the PCX Teams & other related Teams.</p>
 
+<div>
+  &nbsp;
+</div>
 <input type="hidden" #selection>
 
 <div class="card-container" style="font-style: italic; font: xx-large;">
@@ -286,7 +211,7 @@
   </div>
 
   <div class="card card-small" (click)="selection.value = 'stormbreaker'" tabindex="0">
-    <span>Stormbreaker</span>
+    <span>Storm Breaker</span>
   </div>
 
   <div class="card card-small" (click)="selection.value = 'cortez'" tabindex="0">
@@ -302,16 +227,57 @@
   </div>
 
   <div class="card card-small" (click)="selection.value = 'hyperadapt'" tabindex="0">
-    <span>Hyper Adapt</span>
+    <span>HyperAdapt</span>
   </div>
 
   <div class="card card-small" (click)="selection.value = 'pdh'" tabindex="0">
     <span>PDH</span>
   </div>
 
-  <div class="card card-small" (click)="selection.value = 'foundation'" tabindex="0">
-    <span>Foundation</span>
+  <div class="card card-small" (click)="selection.value = 'ldh'" tabindex="0">
+    <span>LDH</span>
   </div>
+
+  <div class="card card-small" (click)="selection.value = 'technocrats'" tabindex="0">
+    <span>Technocrats</span>
+  </div>
+
+  <div class="card card-small" (click)="selection.value = 'sparq'" tabindex="0">
+    <span>SPARQ</span>
+  </div>
+
+  <div class="card card-small" (click)="selection.value = 'pmd'" tabindex="0">
+    <span>Planning</span>
+  </div>
+
+  <div class="card card-small" (click)="selection.value = 'dba'" tabindex="0">
+    <span>DBA</span>
+  </div>
+
+  <div class="card card-small" (click)="selection.value = 'dpc'" tabindex="0">
+    <span>DPC</span>
+  </div>
+
+  <div class="card card-small" (click)="selection.value = 'mmx'" tabindex="0">
+    <span>MMX Adv</span>
+  </div>
+
+  <div class="card card-small" (click)="selection.value = 'fw'" tabindex="0">
+    <span>FW Adv</span>
+  </div>
+
+  <div class="card card-small" (click)="selection.value = 'ap'" tabindex="0">
+    <span>AP Adv</span>
+  </div>
+
+  <div class="card card-small" (click)="selection.value = 'dss'" tabindex="0">
+    <span>DSS Adv</span>
+  </div>
+
+  <div class="card card-small" (click)="selection.value = 'cdb'" tabindex="0">
+    <span>CDB Adv</span>
+  </div>
+
 </div>
 
 <!-- Terminal -->
@@ -329,5 +295,15 @@
     <pre *ngSwitchCase="'hyperadapt'">Lst-GT.Create.PD.Foundation.HyperAdapt@nike.com</pre>
     <pre *ngSwitchCase="'aria'">Lst-Technology.PDA.MPC.Analytics@nike.com; Yashodhan.Pitolwala@nike.com;</pre>
     <pre *ngSwitchCase="'pdh'">Lst-Technology.PES.PDH.Support@nike.com</pre>
-    <pre *ngSwitchCase="'foundation'">Lst-GT.Create.PD.Foundation.Technocrats@nike.com</pre>
+    <pre *ngSwitchCase="'dpc'">Lst-Technology.PES.DPC.Platform.Adv.Support@nike.com</pre>
+    <pre *ngSwitchCase="'ldh'">Lst-Technology.PES.LDH.Support@nike.com</pre>
+    <pre *ngSwitchCase="'technocrats'">Lst-GT.Create.PD.Foundation.Technocrats@nike.com</pre>
+    <pre *ngSwitchCase="'sparq'">Lst-GT.Create.PD.Foundation.SPARQ@nike.com</pre>
+    <pre *ngSwitchCase="'pmd'">Lst-PL.Data.Support@nike.com</pre>
+    <pre *ngSwitchCase="'mmx'">Lst-Technology.PES.LP.MMX.Adv.Support@nike.com</pre>
+    <pre *ngSwitchCase="'fw'">Lst-Technology.PES.MTP.FW.Adv.Support@nike.com</pre>
+    <pre *ngSwitchCase="'ap'">Lst-Technology.PES.MTP.AP.Adv.Support@nike.com</pre>
+    <pre *ngSwitchCase="'dss'">Lst-Technology.PES.MTP.DSS.Adv.Support@nike.com</pre>
+    <pre *ngSwitchCase="'cdb'">Lst-Technology.PES.CDB.Adv.Support</pre>
+    <pre *ngSwitchCase="'dba'">Lst-Technology.TechOps.Infra.DB.Oracle.Cognizant@nike.com</pre>
 </div>

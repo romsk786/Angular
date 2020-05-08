@@ -25,29 +25,6 @@
     flex: 1;
   }
 
-  .toolbar {
-    height: 60px;
-    margin: -8px;
-    display: flex;
-    align-items: center;
-    background-color: rgb(49, 47, 47);
-    color: palegoldenrod;
-    font-weight: 600;
-  }
-
-  .toolbar img {
-    margin: 0 16px;
-  }
-
-  .toolbar #twitter-logo {
-    height: 40px;
-    margin: 0 16px;
-  }
-
-  .toolbar #twitter-logo:hover {
-    opacity: 0.8;
-  }
-
   .content {
     display: flex;
     margin: 32px auto;
@@ -55,15 +32,6 @@
     max-width: 960px;
     flex-direction: column;
     align-items: center;
-  }
-
-  svg.material-icons {
-    height: 24px;
-    width: auto;
-  }
-
-  svg.material-icons:not(:last-child) {
-    margin-right: 8px;
   }
 
   .card svg.material-icons path {
@@ -133,36 +101,9 @@
     margin-left: 60px;
   }
 
-  svg#rocket {
-    width: 80px;
-    position: absolute;
-    left: -10px;
-    top: -24px;
-  }
-
-  svg#rocket-smoke {
-    height: 100vh;
-    position: absolute;
-    top: 10px;
-    right: 180px;
-    z-index: -10;
-  }
-
-  a,
-  a:visited,
-  a:hover {
-    color: #1976d2;
-    text-decoration: none;
-  }
-
-  a:hover {
-    color: #125699;
-  }
-
   .terminal {
     position: relative;
-    width: 100%;
-    max-width: 1500px;
+    width: auto;
     border-radius: 6px;
     padding-top: 45px;
     margin-top: 8px;
@@ -212,16 +153,6 @@
     box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.2);
   }
 
-  
-  svg#clouds {
-    position: fixed;
-    bottom: -160px;
-    left: -230px;
-    z-index: -10;
-    width: 1920px;
-  }
-
-
   /* Responsive Styles */
   @media screen and (max-width: 767px) {
 
@@ -238,23 +169,18 @@
     .card.highlight-card span {
       margin-left: 72px;
     }
-
-    svg#rocket-smoke {
-      right: 120px;
-      transform: rotate(-5deg);
-    }
-  }
-
-  @media screen and (max-width: 575px) {
-    svg#rocket-smoke {
-      display: none;
-      visibility: hidden;
-    }
   }
 </style>
 
+<div>
+  &nbsp;
+</div>
 
 <p style="text-align: center; text-decoration: underline;">This page contains frequently used Queries of PCX.</p>
+
+<div>
+  &nbsp;
+</div>
 
 <input type="hidden" #selection>
   
