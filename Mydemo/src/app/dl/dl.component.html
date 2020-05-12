@@ -103,7 +103,8 @@
 
   .terminal {
     position: relative;
-    width: 700px;
+    text-align: center;
+    width: fit-content;
     border-radius: 6px;
     padding-top: 45px;
     margin-top: 8px;
@@ -128,7 +129,7 @@
 
   .terminal pre {
     font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace;
-    color: white;
+    color: palegoldenrod;
     padding: 0 1rem 1rem;
     margin: 0;
   }
@@ -176,7 +177,7 @@
   &nbsp;
 </div>
 
-<p style="text-align: center; text-decoration: underline;">This page has the Distribution Lists of all the PCX Teams & other related Teams.</p>
+<p style="text-align: center; text-decoration: underline;">This page has the Distribution Lists of all the PCX & other Teams.</p>
 
 <div>
   &nbsp;
@@ -278,6 +279,15 @@
     <span>CDB Adv</span>
   </div>
 
+  <div class="card card-small" (click)="selection.value = 'eq'" tabindex="0">
+    <span>EQ Adv</span>
+  </div>
+
+  <div class="card card-small" (click)="selection.value = 'eqfl'" tabindex="0">
+    <span>EQ FL</span>
+  </div>
+
+
 </div>
 
 <!-- Terminal -->
@@ -306,4 +316,6 @@
     <pre *ngSwitchCase="'dss'">Lst-Technology.PES.MTP.DSS.Adv.Support@nike.com</pre>
     <pre *ngSwitchCase="'cdb'">Lst-Technology.PES.CDB.Adv.Support</pre>
     <pre *ngSwitchCase="'dba'">Lst-Technology.TechOps.Infra.DB.Oracle.Cognizant@nike.com</pre>
+    <pre *ngSwitchCase="'eq'">Lst-Technology.PES.MTP.EQ.Adv.Support@nike.com</pre>
+    <pre *ngSwitchCase="'eqfl'">Lst-Technology.PES.eq.flexpdm.support@nike.com</pre>
 </div>
