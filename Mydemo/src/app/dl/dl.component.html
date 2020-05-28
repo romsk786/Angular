@@ -177,23 +177,83 @@
   &nbsp;
 </div>
 
-<p style="text-align: center; text-decoration: underline;">This page has the Distribution Lists of all the PCX & other Teams.</p>
-
 <div>
   &nbsp;
 </div>
 <input type="hidden" #selection>
-
+<h2 style="text-align: center; text-decoration: underline;">Advance Team DL's</h2>
 <div class="card-container" style="font-style: italic; font: xx-large;">
   <div class="card card-small" (click)="selection.value = 'adv'" tabindex="0">
     <span>PCX ADV</span>
   </div>
 
+  <div class="card card-small" (click)="selection.value = 'eq'" tabindex="0">
+    <span>EQ Adv</span>
+  </div>
+
+  <div class="card card-small" (click)="selection.value = 'ap'" tabindex="0">
+    <span>AP Adv</span>
+  </div>
+
+  <div class="card card-small" (click)="selection.value = 'fw'" tabindex="0">
+    <span>FW Adv</span>
+  </div>
+
+  <div class="card card-small" (click)="selection.value = 'mmx'" tabindex="0">
+    <span>MMX Adv</span>
+  </div>
+
+  <div class="card card-small" (click)="selection.value = 'dss'" tabindex="0">
+    <span>DSS Adv</span>
+  </div>
+
+  <div class="card card-small" (click)="selection.value = 'cdb'" tabindex="0">
+    <span>CDB Adv</span>
+  </div>
+
+  <div class="card card-small" (click)="selection.value = 'manfredadv'" tabindex="0">
+    <span>Manfred Adv</span>
+  </div>
+
+</div>
+
+<h2 style="text-align: center; text-decoration: underline;">Frontline Team DL's</h2>
+<div class="card-container"  style="font-style: italic; font: bolder;">
+
   <div class="card card-small" (click)="selection.value = 'fl'" tabindex="0">
     <span>PCX FL</span>
   </div>
+  
+  <div class="card card-small" (click)="selection.value = 'eqfl'" tabindex="0">
+    <span>EQ FL</span>
+  </div>
+
+  <div class="card card-small" (click)="selection.value = 'ap-ppsfl'" tabindex="0">
+    <span>AP PPS FL</span>
+  </div>
+
+  <div class="card card-small" (click)="selection.value = 'fw-ppsfl'" tabindex="0">
+    <span>FW PPS FL</span>
+  </div>
+
+  <div class="card card-small" (click)="selection.value = 'fwpdmfl'" tabindex="0">
+    <span>FW PDM FL</span>
+  </div>
+
+  <div class="card card-small" (click)="selection.value = 'mmxfl'" tabindex="0">
+    <span>MMX FL</span>
+  </div>
+
+  <div class="card card-small" (click)="selection.value = 'dssfl'" tabindex="0">
+    <span>DSS FL</span>
+  </div>
+  
+  <div class="card card-small" (click)="selection.value = 'manfredfl'" tabindex="0">
+    <span>Manfred FL</span>
+  </div>
 </div>
 
+<h2 style="text-align: center; text-decoration: underline;">Project Team DL's</h2>
 <div class="card-container"  style="font-style: italic; font: bolder;">
   <div class="card card-small" (click)="selection.value = 'jumpman'" tabindex="0">
     <span>Jumpman</span>
@@ -259,33 +319,7 @@
     <span>DPC</span>
   </div>
 
-  <div class="card card-small" (click)="selection.value = 'mmx'" tabindex="0">
-    <span>MMX Adv</span>
-  </div>
-
-  <div class="card card-small" (click)="selection.value = 'fw'" tabindex="0">
-    <span>FW Adv</span>
-  </div>
-
-  <div class="card card-small" (click)="selection.value = 'ap'" tabindex="0">
-    <span>AP Adv</span>
-  </div>
-
-  <div class="card card-small" (click)="selection.value = 'dss'" tabindex="0">
-    <span>DSS Adv</span>
-  </div>
-
-  <div class="card card-small" (click)="selection.value = 'cdb'" tabindex="0">
-    <span>CDB Adv</span>
-  </div>
-
-  <div class="card card-small" (click)="selection.value = 'eq'" tabindex="0">
-    <span>EQ Adv</span>
-  </div>
-
-  <div class="card card-small" (click)="selection.value = 'eqfl'" tabindex="0">
-    <span>EQ FL</span>
-  </div>
+  
 
 
 </div>
@@ -318,4 +352,11 @@
     <pre *ngSwitchCase="'dba'">Lst-Technology.TechOps.Infra.DB.Oracle.Cognizant@nike.com</pre>
     <pre *ngSwitchCase="'eq'">Lst-Technology.PES.MTP.EQ.Adv.Support@nike.com</pre>
     <pre *ngSwitchCase="'eqfl'">Lst-Technology.PES.eq.flexpdm.support@nike.com</pre>
+    <pre *ngSwitchCase="'manfredadv'">Lst-Technology.PES.MTP.Manfred.Adv.Support@nike.com</pre>
+    <pre *ngSwitchCase="'manfredfl'">Lst-est.pcs.manfred.support@nike.com</pre>
+    <pre *ngSwitchCase="'ap-ppsfl'">Lst-Technology.PES.PPS.Apparel.Support@nike.com</pre>
+    <pre *ngSwitchCase="'fw-ppsfl'">Lst-Technology.PES.ftwr.pps.support@nike.com</pre>
+    <pre *ngSwitchCase="'fwpdmfl'">Lst-Technology.PES.fwpdm.support@nike.com</pre>
+    <pre *ngSwitchCase="'mmxfl'">Lst-Technology.PES.MMX.Production.Support@nike.com</pre>
+    <pre *ngSwitchCase="'dssfl'">Lst-Technology.PES.DSS.Support@nike.com</pre>
 </div>
