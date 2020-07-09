@@ -173,13 +173,7 @@
   }
 </style>
 
-<div>
-  &nbsp;
-</div>
 
-<div>
-  &nbsp;
-</div>
 <input type="hidden" #selection>
 <h2 style="text-align: center; text-decoration: underline;">Advance Team DL's</h2>
 <div class="card-container" style="font-style: italic; font: xx-large;">
@@ -250,6 +244,10 @@
   
   <div class="card card-small" (click)="selection.value = 'manfredfl'" tabindex="0">
     <span>Manfred FL</span>
+  </div>
+
+  <div class="card card-small" (click)="selection.value = 'fusionfl'" tabindex="0">
+    <span>Fusion FL</span>
   </div>
 </div>
 
@@ -359,4 +357,5 @@
     <pre *ngSwitchCase="'fwpdmfl'">Lst-Technology.PES.fwpdm.support@nike.com</pre>
     <pre *ngSwitchCase="'mmxfl'">Lst-Technology.PES.MMX.Production.Support@nike.com</pre>
     <pre *ngSwitchCase="'dssfl'">Lst-Technology.PES.DSS.Support@nike.com</pre>
+    <pre *ngSwitchCase="'fusionfl'">Lst-Frontline.FUSION@nike.com</pre>
 </div>
