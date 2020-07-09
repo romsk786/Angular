@@ -212,6 +212,14 @@
   <div class="card card-medium" (click)="selection.value = 'pcx6'" tabindex="0">
     <span>PCX DB Tables</span>
   </div>
+
+  <div class="card card-medium" (click)="selection.value = 'pcx7'" tabindex="0">
+    <span>MxS last updated info</span>
+  </div>
+
+  <div class="card card-medium" (click)="selection.value = 'pcx8'" tabindex="0">
+    <span>Colors in Palette</span>
+  </div>
 </div>
 
 <!-- Terminal -->
@@ -531,6 +539,69 @@ Flex Type = \49742\250384\250572\69159400  --- Promo
         and LCSMATERIAL.STATECHECKOUTINFO = 'c/i'
         AND LCSMATERIALSUPPLIER.PTC_LNG_30TYPEINFOLCSMATERIA IN (406171);
       </pre>
+      <pre *ngSwitchCase="'pcx7'">
+        SELECT
+    (
+        SELECT
+            wtuser.fullname
+        FROM
+            manrev.wtuser wtuser
+        WHERE
+            wtuser.ida2a2 = ida3b2iterationinfo
+    ) AS "User",
+    ptc_lng_30typeinfolcsmateria as "PCX MxS",
+    updatestampa2,
+    modifystampa2
+FROM
+    manrev.lcsmaterialsupplier
+WHERE
+    ida3b2iterationinfo IN (
+        65246026
+    )
+    AND latestiterationinfo = 1
+    AND modifystampa2 > '01-JAN-20'
+    order by modifystampa2;
+      </pre>
+      <pre *ngSwitchCase="'pcx8'">
+      SELECT
+    (
+        SELECT
+            clr.colorname
+        FROM
+            manrev.lcscolor clr
+        WHERE
+            pcl.ida3a5 = clr.ida2a2
+    ) AS "Color Name",
+    (
+        SELECT
+            clr.ptc_str_9typeinfolcscolor
+        FROM
+            manrev.lcscolor clr
+        WHERE
+            pcl.ida3a5 = clr.ida2a2
+    ) AS "Available Engines",
+    (
+        SELECT
+            plt.palettename
+        FROM
+            manrev.lcspalette plt
+        WHERE
+            plt.ida2a2 = pcl.ida3b5
+    ) AS "Palette Name"
+FROM
+    manrev.lcspalettetocolorlink pcl
+WHERE
+    pcl.ida3b5 = (
+        SELECT
+            plt.ida2a2
+        FROM
+            manrev.lcspalette plt
+        WHERE
+            lower(plt.palettename) LIKE '%apparel-ho20%'
+    )
+ORDER BY
+    "Color Name";
+    </pre>
       <pre *ngSwitchCase="'pcx6'">
         DEVSTYLE:             MANREV.LCSPRODUCT
         DEVSTYLE REV:         MANREV.PRODAREV
