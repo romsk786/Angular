@@ -220,6 +220,11 @@
   <div class="card card-medium" (click)="selection.value = 'pcx8'" tabindex="0">
     <span>Colors in Palette</span>
   </div>
+
+  <div class="card card-medium" (click)="selection.value = 'pcx9'" tabindex="0">
+    <span>SATRASSUM & AHS</span>
+  </div>
+
 </div>
 
 <!-- Terminal -->
@@ -541,68 +546,68 @@ Flex Type = \49742\250384\250572\69159400  --- Promo
       </pre>
       <pre *ngSwitchCase="'pcx7'">
         SELECT
-    (
-        SELECT
-            wtuser.fullname
-        FROM
-            manrev.wtuser wtuser
-        WHERE
-            wtuser.ida2a2 = ida3b2iterationinfo
-    ) AS "User",
-    ptc_lng_30typeinfolcsmateria as "PCX MxS",
-    updatestampa2,
-    modifystampa2
-FROM
-    manrev.lcsmaterialsupplier
-WHERE
-    ida3b2iterationinfo IN (
-        65246026
-    )
-    AND latestiterationinfo = 1
-    AND modifystampa2 > '01-JAN-20'
-    order by modifystampa2;
-      </pre>
-      <pre *ngSwitchCase="'pcx8'">
-      SELECT
-    (
-        SELECT
-            clr.colorname
-        FROM
-            manrev.lcscolor clr
-        WHERE
-            pcl.ida3a5 = clr.ida2a2
-    ) AS "Color Name",
-    (
-        SELECT
-            clr.ptc_str_9typeinfolcscolor
-        FROM
-            manrev.lcscolor clr
-        WHERE
-            pcl.ida3a5 = clr.ida2a2
-    ) AS "Available Engines",
-    (
-        SELECT
-            plt.palettename
-        FROM
-            manrev.lcspalette plt
-        WHERE
-            plt.ida2a2 = pcl.ida3b5
-    ) AS "Palette Name"
-FROM
-    manrev.lcspalettetocolorlink pcl
-WHERE
-    pcl.ida3b5 = (
-        SELECT
-            plt.ida2a2
-        FROM
-            manrev.lcspalette plt
-        WHERE
-            lower(plt.palettename) LIKE '%apparel-ho20%'
-    )
-ORDER BY
-    "Color Name";
+              (
+                SELECT
+                    wtuser.fullname
+                FROM
+                    manrev.wtuser wtuser
+                WHERE
+                    wtuser.ida2a2 = ida3b2iterationinfo
+              ) AS "User",
+              ptc_lng_30typeinfolcsmateria as "PCX MxS",
+              updatestampa2,
+              modifystampa2
+            FROM
+                manrev.lcsmaterialsupplier
+            WHERE
+                ida3b2iterationinfo IN (
+                    65246026
+                )
+                AND latestiterationinfo = 1
+                AND modifystampa2 > '01-JAN-20'
+                order by modifystampa2;
+                  </pre>
+                  <pre *ngSwitchCase="'pcx8'">
+                  SELECT
+                (
+                    SELECT
+                        clr.colorname
+                    FROM
+                        manrev.lcscolor clr
+                    WHERE
+                        pcl.ida3a5 = clr.ida2a2
+                ) AS "Color Name",
+                (
+                    SELECT
+                        clr.ptc_str_9typeinfolcscolor
+                    FROM
+                        manrev.lcscolor clr
+                    WHERE
+                        pcl.ida3a5 = clr.ida2a2
+                ) AS "Available Engines",
+                (
+                    SELECT
+                        plt.palettename
+                    FROM
+                        manrev.lcspalette plt
+                    WHERE
+                        plt.ida2a2 = pcl.ida3b5
+                ) AS "Palette Name"
+              FROM
+                  manrev.lcspalettetocolorlink pcl
+              WHERE
+                  pcl.ida3b5 = (
+                      SELECT
+                          plt.ida2a2
+                      FROM
+                          manrev.lcspalette plt
+                      WHERE
+                          lower(plt.palettename) LIKE '%apparel-ho20%'
+                  )
+            ORDER BY
+                "Color Name";
     </pre>
-      <pre *ngSwitchCase="'pcx6'">
+    <pre *ngSwitchCase="'pcx6'">
         DEVSTYLE:             MANREV.LCSPRODUCT
         DEVSTYLE REV:         MANREV.PRODAREV
         COLORWAY:             MANREV.LCSSKU
@@ -657,5 +662,27 @@ ORDER BY
         TYPE DEF:             MANREV.LWCTYPEDEFINITION
         DATA TYPE DEF:        MANREV.LWCDATATYPEDEFINITION
         WT TYPE DEF:          MANREV.WTTYPEDEFINITION
-      </pre>
+    </pre>
+    <pre *ngSwitchCase="'pcx9'">
+      SELECT DISTINCT
+        mm.name                           AS "PCX Material",
+        ms.ptc_lng_30typeinfolcsmateria   AS "PCX Material Supplier",
+        ms.ptc_str_281typeinfolcsmateri   AS "Satrasumm",
+        ms.ptc_lng_13typeinfolcsmateria   AS "AHS",
+        m.ptc_str_109typeinfolcsmateri    AS "PDM Material Number",
+        ms.ptc_str_103typeinfolcsmateri   AS "PDM Material By Supplier Number"
+      FROM
+        manrev.lcsmaterialsupplier ms,
+        manrev.lcsmaterialsuppliermaster smm,
+        manrev.lcsmaterialmaster mm,
+        manrev.lcsmaterial m
+      WHERE
+        ms.ida3masterreference = smm.ida2a2
+        AND smm.ida3a6 = mm.ida2a2
+        AND m.ida3masterreference = mm.ida2a2
+        AND ms.ptc_str_103typeinfolcsmateri IS NOT NULL
+        AND m.ptc_lng_38typeinfolcsmateria in() 
+        AND m.latestiterationinfo = 1
+        AND ms.latestiterationinfo = 1;
+    </pre>
 </div>
