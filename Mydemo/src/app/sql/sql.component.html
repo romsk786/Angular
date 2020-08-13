@@ -245,6 +245,14 @@
     <span>EQ Sales Sample Query</span>
   </div>
 
+  <div class="card card-medium" (click)="selection.value = 'eq5'" tabindex="0" style="text-align: center;">
+    <span>EQ Features & Benefits</span>
+  </div>
+
+  <div class="card card-medium" (click)="selection.value = 'eq6'" tabindex="0" style="text-align: center;">
+    <span>EQ Primary Source of a Style</span>
+  </div>
+
 </div>
 
 <!-- Terminal -->
@@ -987,5 +995,62 @@ Flex Type = \49742\250384\250572\69159400  --- Promo
       AND seas.latestiterationinfo = 1
       AND sgsl.effectlatest = 1
       ORDER BY p.att25;
+    </pre>
+    <pre *ngSwitchCase="'eq5'">
+      SELECT 
+        * 
+      FROM WCADMIN.LCSLIFECYCLEMANAGED 
+      WHERE 
+        IDA2A2 IN 
+          (SELECT moa.NUM1 
+            FROM WCADMIN.LCSMOAOBJECT moa WHERE moa.IDA3A5 
+            IN 
+            (SELECT DISTINCT(p.IDA3MASTERREFERENCE) 
+             FROM WCADMIN.LCSPRODUCT p 
+             WHERE p.ATT25 = 'BA4402'));
+    </pre>
+    <pre *ngSwitchCase="'eq6'">
+      SELECT
+          p.att25     AS "Style Number",
+          s.att3      AS "Colorway Id",
+          seas.att1   AS "Season",
+          src.att1    AS "Source",
+          ssl.att2    AS "Primary Flag"
+      FROM
+          lcssourcetoseasonlink ssl,
+          lcsproduct p,
+          lcssku s,
+          lcssourcingconfig src,
+          lcsseason seas,
+          productseasonlink psl,
+          skuseasonlink skusl
+      WHERE
+          p.att25 = 'SX4801'
+          AND p.branchiditerationinfo = s.productarevid
+          AND p.branchiditerationinfo = src.productarevid
+          AND src.ida3masterreference = ssl.sourcingconfigmasterid
+          AND seas.ida3masterreference = ssl.seasonmasterid
+          AND psl.productarevid = p.branchiditerationinfo
+          AND skusl.productarevid = p.branchiditerationinfo
+          AND psl.seasonrevid = seas.branchiditerationinfo
+          AND skusl.seasonrevid = seas.branchiditerationinfo
+          AND skusl.skuarevid = s.branchiditerationinfo
+          AND p.latestiterationinfo = 1
+          AND s.latestiterationinfo = 1
+          AND src.latestiterationinfo = 1
+          AND seas.latestiterationinfo = 1
+          AND ssl.latestiterationinfo = 1
+          AND p.versionida2versioninfo = 'A'
+          AND s.versionida2versioninfo = 'A'
+          AND src.versionida2versioninfo = 'A'
+          AND seas.versionida2versioninfo = 'A'
+          AND ssl.versionida2versioninfo = 'A'
+          AND ssl.att2 = 'yes'
+          AND s.att3 IS NOT NULL
+          AND s.att3 <> 'XXX'
+      ORDER BY
+          s.att3,
+          seas.att1,
+          src.att1;
     </pre>
 </div>
