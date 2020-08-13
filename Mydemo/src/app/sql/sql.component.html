@@ -194,7 +194,11 @@
   </div>
 
   <div class="card card-medium" (click)="selection.value = 'fw1'" tabindex="0" style="text-align: center;">
-    <span>FWPDM PCC-SR</span>
+    <span>FWPDM PCC - SR</span>
+  </div>
+
+  <div class="card card-medium" (click)="selection.value = 'fw2'" tabindex="0" style="text-align: center;">
+    <span>FWPDM PCC - Retail Info</span>
   </div>
 
   <div class="card card-medium" (click)="selection.value = 'pcx1'" tabindex="0" style="text-align: center;">
@@ -223,6 +227,22 @@
 
   <div class="card card-medium" (click)="selection.value = 'pcx9'" tabindex="0" style="text-align: center;">
     <span>SATRASSUM & AHS</span>
+  </div>
+
+  <div class="card card-medium" (click)="selection.value = 'eq1'" tabindex="0" style="text-align: center;">
+    <span>EQ Query for CDB Product Data</span>
+  </div>
+
+  <div class="card card-medium" (click)="selection.value = 'eq2'" tabindex="0" style="text-align: center;">
+    <span>EQ Query for Samples Team</span>
+  </div>
+
+  <div class="card card-medium" (click)="selection.value = 'eq3'" tabindex="0" style="text-align: center;">
+    <span>EQ DB Info for Business Objects</span>
+  </div>
+
+  <div class="card card-medium" (click)="selection.value = 'eq4'" tabindex="0" style="text-align: center;">
+    <span>EQ Sales Sample Query</span>
   </div>
 
 </div>
@@ -684,5 +704,288 @@ Flex Type = \49742\250384\250572\69159400  --- Promo
         AND m.ptc_lng_38typeinfolcsmateria in() 
         AND m.latestiterationinfo = 1
         AND ms.latestiterationinfo = 1;
+    </pre>
+    <pre *ngSwitchCase="'fw2'">
+      SELECT DISTINCT
+          F.FACTORY                    AS "PCC",
+          CY.ABBREVIATION              AS "Season",
+          M.NAME                       AS "Model Name",
+          LS.STYLENUMBER               AS "PCX Dev Style Number",
+          B.PCXDEVCOLORWAYID           AS "PCX Dev Colorway ID",
+          LS.STYLENAME                 AS "PCX Dev Style Name",
+          DS.ALIAS                     AS "PCM DPA",
+          MO.TARGETRETAILPRICE         AS "Target Retail Price"
+      FROM
+          WCADMIN.FWDEVELOPMENTSTREAM DS,
+          WCADMIN.FWBOM B,
+          WCADMIN.FWBOMPRODUCTLINK BPL,
+          WCADMIN.FWPRODUCT P,
+          WCADMIN.FWLEGACYSTYLE LS,
+          WCADMIN.FWDEVSTREAMFACTORYRESOURCE DSF,
+          WCADMIN.FWFACTORY FWF,
+          WCADMIN.FACTORY F,
+          WCADMIN.FWCYCLEYEAR CY,
+          WCADMIN.FWMODEL M,
+          WCADMIN.FWMODELOFFERING MO,
+          WCADMIN.ROLEPRINCIPALMAP RPM,
+          WCADMIN.TEAM T,
+          WCADMIN.WTUSER U
+      WHERE
+          DS.IDA2A2 = B.IDA3B9
+          AND B.IDA2A2 = BPL.IDA3A5
+          AND BPL.IDA3B5 = P.IDA2A2
+          AND P.IDA3K9 = LS.IDA2A2
+          AND P.IDA3L9 = CY.IDA2A2
+          AND DS.IDA2A2 = DSF.IDA3A5
+          AND DSF.IDA3B5 = FWF.IDA2A2
+          AND FWF.IDA3A5 = F.IDA2A2
+          AND P.IDA3B9 = M.IDA2A2
+          AND M.IDA2A2 = MO.IDA3A9
+          AND CY.IDA2A2 = MO.IDA3D9
+          AND RPM.IDA3A4 = T.IDA2A2
+          AND T.IDA2A2 = DS.IDA3TEAMID
+          AND RPM.IDA3B4 = U.IDA2A2 (+)
+          AND MO.STATUS = 'ACTIVE'
+          AND RPM.ROLE = 'FWPCCDEVELOPER'
+          AND DSF.FACTORYTYPE = 'DEV'
+          AND CY.ABBREVIATION IN (
+              'SP17',
+              'SP18',
+              'SP19',
+              'SP20',
+              'SU17',
+              'SU18',
+              'SU19',
+              'SU20',
+              'FA16',
+              'FA17',
+              'FA18',
+              'FA19',
+              'FA20',
+              'HO16',
+              'HO17',
+              'HO18',
+              'HO19'
+          )
+          AND F.FACTORY IN (
+              'T2',
+              'VT'
+          )
+      ORDER BY
+          CY.ABBREVIATION,
+          F.FACTORY,
+          DS.ALIAS;
+    </pre>
+    <pre *ngSwitchCase="'eq1'">
+      SELECT
+        att58,att25, att76,att77, MODIFYSTAMPA2
+      FROM
+        wcadmin.Prodarev 
+      WHERE
+        att25 IN ();
+    </pre>
+    <pre *ngSwitchCase="'eq3'">
+        /*Features & Benefits in BO*/
+        select * from wcadmin.lcslifecyclemanaged where flextypeidpath = '\5711\12503\12525'
+        order by updatestampa2 desc;
+
+        /*Seasons in BO*/
+        select * from wcadmin.lcslifecyclemanaged where flextypeidpath = '\5711\12117\12422'
+        order by updatestampa2 desc;
+
+        /*Categories in BO*/
+        select * from wcadmin.lcslifecyclemanaged where flextypeidpath = '\5711\12117\12129'
+        order by updatestampa2 desc;
+
+        /*Sub categories in BO*/
+        select * from wcadmin.lcslifecyclemanaged where flextypeidpath = '\5711\12117\12491'
+        order by updatestampa2 desc;
+
+        /*Segment Xref table*/
+        select * from wcadmin.lcslifecyclemanaged where flextypeidpath = '\5711\13064\13128' 
+        order by updatestampa2 desc;
+
+        /*Segments in BO*/
+        select * from wcadmin.lcslifecyclemanaged where flextypeidpath = '\5711\12117\12459' 
+        order by updatestampa2 desc;
+
+        /*SPORT ACTIVITIES in BO*/
+        select * from wcadmin.lcslifecyclemanaged where flextypeidpath = '\5711\12117\12486' 
+        order by updatestampa2 desc;
+
+        /*Season Group Master Table in BO*/
+        select * from wcadmin.lcslifecyclemanaged where flextypeidpath = '\5711\12973' 
+        order by updatestampa2 desc;
+
+        /*Category SubCategory XREF Table in BO*/
+        select * from wcadmin.lcslifecyclemanaged where flextypeidpath = '\5711\13064\13065'
+        order by updatestampa2 desc;
+
+        --------Below is mapping of db attributes to Flex attributes for Category SubCategory XREF table---------
+          att1 = SubCategory 
+          att4 = SAP Category Key 
+          att7 = First Selling Season 
+          att9 = GOAL Family Code 
+          att10 = GOAL Line Code
+          att15 = Status 
+          att16 = SAP SubCategory Key
+          att17 = Valid Age 
+          att18 = Valid Body Type 
+          att19 = Valid Finished Goods Flag
+          att20 = Valid Gender
+          att21 = Valid Segment
+          att22 = Valid Silhouette
+          att23 = Valid Size Grid 
+          att24 = Valid Sport Activity 
+
+    </pre>
+    <pre *ngSwitchCase="'eq2'">
+      SELECT
+          SUBSTR(season.att9,1,2)||SUBSTR(season.att9,11,2) AS "Season",
+          sggrp14097.att1                   AS "SeasonGroup/LineSelection",                                             
+          (SELECT att4                          
+                FROM wcadmin.LCSLifeCycleManaged 
+                WHERE flextypeidpath = '\5711\12117\12129'    
+                AND att3 = REPLACE(lcsproduct.att10,'_30','')) AS "Category",
+          (SELECT att7 
+                FROM wcadmin.LCSLifeCycleManaged
+              WHERE flextypeidpath = '\5711\12117\12491'
+                  AND att6 = REPLACE(lcsproduct.att60,'_30',''))AS "SubCategory",
+          lcsproduct.att25                  AS "StyleNumber",
+          lcssku.att3                       AS "ColorwayCode",    
+          INITCAP(lcssku.att25)             AS "SalesSampleFlag",
+          sgsku14097.num8                   AS "LocalSalesSampleQty",--******
+          INITCAP(sgsku14097.att4)          AS "GlobalColorwayNew/Carryover",
+          INITCAP(sgsku14097.att3)          AS "GlobalSalesSampleStatus",
+          sgsku14097.att10                  AS "SalesSampleOrderStatus",
+          REPLACE(REPLACE(REPLACE(RTRIM(LTRIM(lcssku.att10,'|~*~|'),'|~*~|'),'|~*~|',','),'_SESN_20',''),'_30','') AS ColorwaySellingSeasons,
+          INITCAP(sgprod14097.att2)         AS "GlobalStyleNew/Carryover",
+          INITCAP(sgsku14097.att2)          AS "GroupColorwayNew/Carryover",    
+          INITCAP(sgprod14097.att3)         AS "GroupStyleNew/Carryover",
+          INITCAP(lcscostsheet.att1)        AS "ConfirmedForSamplePO",
+          t1700965653.att1                  AS "FactoryCode",
+          lcsproduct.att1                   AS "MktgStyleName",
+          lcssku.att1                       AS "ColorwayName",
+          lcscostsheet.num5                 AS "SampleFOB",
+          lcscostsheet.num6                 AS "SampleFOB(USD)",
+          lcscostsheet.date3                AS "SampleFOBLastChangedDate",
+          INITCAP(lcssourcetoseasonlink.att3) AS "SalesSampleFactoryFlag",
+          lcssourcetoseasonlink.att1        AS "NLODeveloper", 
+          (SELECT att5 
+            FROM wcadmin.LCSLifeCycleManaged
+          WHERE flextypeidpath = '\5711\12117\12296'
+              AND num1 = REPLACE(lcsproduct.att28,'_30','')) AS "MarketingType", 
+          REPLACE(REPLACE(REPLACE(RTRIM(LTRIM(lcssku.att38,'|~*~|'),'|~*~|'),'|~*~|',','),'_SESN_20',''),'_30','') ColorwayFirstSellingSeason,
+          LTRIM(REPLACE(REPLACE(lcsproduct.att53,'|~*~|',', '),'_USA',''),',')    AS Sizes, 
+          REPLACE(REPLACE(lcssku.att53,'|~*~|',', '),'_USA','')        AS Colorway_Sizes,
+          lcssourcingconfig.att1                      AS Sourcing,
+          INITCAP(lcssourcetoseasonlink.att3)         AS Primary_Source,
+          (SELECT att3
+            FROM wcadmin.LCSLifeCycleManaged
+          WHERE flextypeidpath = '\5711\12117\153812118'
+              AND att1 = lcsproduct.att77)  AS Global_Category_Summary,
+          sggrp14097.ida3masterreference,
+          lcsproduct.ida3masterreference    prod_ida3masterreference,
+          lcsproduct.ida2a2
+          --DevResponsibility
+          --ColorCode
+          --CAM Flag
+          --CAF Flag
+      FROM
+          wcadmin.prodarev lcsproduct,
+          wcadmin.skuarev lcssku,
+          wcadmin.skuseasonlink lcsseasonproductlink,
+          wcadmin.productseasonlink prodseasonlink,
+          wcadmin.lcssourcingconfig_eff lcssourcingconfig,
+          wcadmin.lcssourcetoseasonlink_eff lcssourcetoseasonlink,
+          wcadmin.lcsskusourcinglink,
+          wcadmin.lcscostsheet_eff lcscostsheet,
+          --wcadmin.latestiterflexspecification flexspecification,
+          wcadmin.lcssourcetoseasonlinkmaster,
+          wcadmin.latestiterlcsfactory t1700965653,
+          wcadmin.seasongroup sggrp14097,
+          wcadmin.seasongrouptoproductlink sgprod14097,
+          wcadmin.seasongrouptoskulink sgsku14097,
+          wcadmin.lcsseason season
+      WHERE
+          lcsproduct.ida3masterreference = lcssku.ida3a12
+          AND lcsproduct.ida3a12 = prodseasonlink.ida3a5
+          AND lcssku.ida3masterreference = lcsseasonproductlink.ida3a5
+          AND prodseasonlink.productmasterid = lcsseasonproductlink.productmasterid
+          AND prodseasonlink.ida3b5 = lcsseasonproductlink.ida3b5
+          AND lcssourcingconfig.productarevid = lcsproduct.branchiditerationinfo
+          AND lcssourcingconfig.ida3masterreference = lcssourcetoseasonlink.sourcingconfigmasterid
+          AND lcssourcetoseasonlink.seasonmasterid = lcsseasonproductlink.ida3b5
+          AND lcsskusourcinglink.ida3a5 = lcssku.ida3masterreference
+          AND lcsskusourcinglink.ida3b5 = lcssourcingconfig.ida3masterreference
+          AND lcsskusourcinglink.ida3a7 = lcsseasonproductlink.ida3b5
+          --AND flexspecification.ida3masterreference (+) = lcscostsheet.ida3d11
+          AND lcscostsheet.seasonmasterid = lcsseasonproductlink.ida3b5
+          AND lcscostsheet.skumasterid = lcsseasonproductlink.ida3a5
+          AND lcscostsheet.sourcemasterid = lcssourcingconfig.ida3masterreference
+          AND lcssourcetoseasonlink.ida3masterreference = lcssourcetoseasonlinkmaster.ida2a2
+          AND lcssourcingconfig.num5 = t1700965653.branchiditerationinfo (+)
+          AND sggrp14097.ida3masterreference = sgprod14097.ida3b5   --
+          AND sgprod14097.ida3a5 = lcsproduct.ida3masterreference
+          AND sgprod14097.seasonmasterid = lcsseasonproductlink.ida3b5
+          AND sgsku14097.ida3a5 = lcssku.ida3masterreference
+          AND sgsku14097.seasonmasterid = lcsseasonproductlink.ida3b5
+          AND sggrp14097.ida3masterreference = sgsku14097.ida3b5    -- 
+          AND (
+              lcsseasonproductlink.seasonremoved IS NULL
+              OR lcsseasonproductlink.seasonremoved = '0'
+          )
+          AND (
+              lcscostsheet.primarycostsheet = '1'
+              OR lcscostsheet.costsheettype = 'SKU'
+          )
+          AND lcscostsheet.whatif = '0'
+          AND lcssourcetoseasonlinkmaster.primarystsl = '1'
+          AND sggrp14097.latestiterationinfo = 1    
+          AND sgprod14097.effectlatest = '1'
+          AND sgprod14097.removed = '0'
+          AND sgsku14097.effectlatest = '1'
+          AND sgsku14097.removed = '0'
+          AND lcssku.att3 IS NOT NULL
+          AND season.ida3masterreference = sgprod14097.seasonmasterid
+          AND season.latestiterationinfo = '1'
+          AND season.att9 IS NOT NULL
+          --AND UPPER(sggrp14097.ATT1) = 'AUSTRALIA'                         -- Sales Group
+          --AND LCSPRODUCT.att25 = ('SX7592')                                -- Style
+          AND SUBSTR(season.att9,1,2)||SUBSTR(season.att9,11,2) = 'SP19'     -- Season
+      ;
+    </pre>
+    <pre *ngSwitchCase="'eq4'">
+      SELECT
+          p.att25      AS styleno,
+          s.att3       AS colorway,
+          sgsl.att3    AS globalsalessamplestatus,
+          sgsl.att10   AS salessampleorderstatus,
+          sgsl.num8    AS localsalessampleqty
+      FROM
+          wcadmin.lcsproduct p,
+          wcadmin.lcssku s,
+          wcadmin.seasongrouptoskulink sgsl,
+          wcadmin.lcsseason seas,
+          wcadmin.seasongroup sgr
+      WHERE p.att25
+            || '-'
+            || s.att3 in()
+      AND seas.att1 = 'EQ Holiday 2016'
+      AND sgr.att1 = 'EUR Sls Mtg'
+      AND p.branchiditerationinfo = s.productarevid
+      AND p.branchiditerationinfo = sgsl.productarevid
+      AND sgsl.ida3b5 = sgr.ida3masterreference
+      AND sgsl.seasonmasterid = seas.ida3masterreference
+      AND s.branchiditerationinfo = sgsl.skuarevid
+      AND s.latestiterationinfo = 1
+      AND s.versionida2versioninfo = 'A'
+      AND p.versionida2versioninfo = 'A'
+      AND p.latestiterationinfo = 1
+      AND sgr.latestiterationinfo = 1
+      AND sgr.versionida2versioninfo = 'A'
+      AND seas.latestiterationinfo = 1
+      AND sgsl.effectlatest = 1
+      ORDER BY p.att25;
     </pre>
 </div>
