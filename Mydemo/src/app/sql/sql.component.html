@@ -173,7 +173,7 @@
 
 <input type="hidden" #selection>
 <h2 style="text-align: center; text-decoration: underline; background-color: darkkhaki;">PCX Queries</h2>
-<div class="card-container"  style="font-style: italic; font: bolder; background-color: khaki;">
+<div class="card-container"  style="font-style: italic; font: bolder; background-color: khaki; padding-top: 15px; padding-bottom: -1px;">
   
   <div class="card card-medium" (click)="selection.value = 'pcx4'" tabindex="0" style="text-align: center;background-color: lightgoldenrodyellow ;">
     <span>Query1 APPDM Long Desc</span>
@@ -207,46 +207,50 @@
     <span>Colors in Palette</span>
   </div>
 
+  <div class="card card-medium" (click)="selection.value = 'pcx10'" tabindex="0" style="text-align: center; background-color: lightgoldenrodyellow ;">
+    <span>Color req attributes</span>
+  </div>
+
   <div class="card card-medium" (click)="selection.value = 'pcx9'" tabindex="0" style="text-align: center; background-color: lightgoldenrodyellow ;">
     <span>SATRASSUM & AHS</span>
   </div>
 </div>
 
 <h2 style="text-align: center; text-decoration: underline; background-color: darkkhaki;">EQ Queries</h2>
-<div class="card-container"  style="font-style: italic; font: bolder; background-color: khaki;">
+<div class="card-container"  style="font-style: italic; font: bolder; background-color: khaki; padding-top: 15px; padding-bottom: -1px;">
   
-  <div class="card card-medium" (click)="selection.value = 'eq1'" tabindex="0" style="text-align: center; background-color: palegoldenrod ;">
+  <div class="card card-medium" (click)="selection.value = 'eq1'" tabindex="0" style="text-align: center; background-color: lightgoldenrodyellow ;">
     <span>EQ Query for CDB Product Data</span>
   </div>
 
-  <div class="card card-medium" (click)="selection.value = 'eq2'" tabindex="0" style="text-align: center; background-color: palegoldenrod ;">
+  <div class="card card-medium" (click)="selection.value = 'eq2'" tabindex="0" style="text-align: center; background-color: lightgoldenrodyellow ;">
     <span>EQ Query for Samples Team</span>
   </div>
 
-  <div class="card card-medium" (click)="selection.value = 'eq3'" tabindex="0" style="text-align: center; background-color: palegoldenrod ;">
+  <div class="card card-medium" (click)="selection.value = 'eq3'" tabindex="0" style="text-align: center; background-color: lightgoldenrodyellow ;">
     <span>EQ DB Info for Business Objects</span>
   </div>
 
-  <div class="card card-medium" (click)="selection.value = 'eq4'" tabindex="0" style="text-align: center; background-color: palegoldenrod ;">
+  <div class="card card-medium" (click)="selection.value = 'eq4'" tabindex="0" style="text-align: center; background-color: lightgoldenrodyellow ;">
     <span>EQ Sales Sample Query</span>
   </div>
 
-  <div class="card card-medium" (click)="selection.value = 'eq5'" tabindex="0" style="text-align: center; background-color: palegoldenrod ;">
+  <div class="card card-medium" (click)="selection.value = 'eq5'" tabindex="0" style="text-align: center; background-color: lightgoldenrodyellow ;">
     <span>EQ Features & Benefits</span>
   </div>
 
-  <div class="card card-medium" (click)="selection.value = 'eq6'" tabindex="0" style="text-align: center; background-color: palegoldenrod ;">
+  <div class="card card-medium" (click)="selection.value = 'eq6'" tabindex="0" style="text-align: center; background-color: lightgoldenrodyellow ;">
     <span>EQ Primary Source of a Style</span>
   </div>
 </div>
 <h2 style="text-align: center; text-decoration: underline; background-color: darkkhaki;">FW Queries</h2>
-<div class="card-container"  style="font-style: italic; font: bolder; background-color: khaki;">
+<div class="card-container"  style="font-style: italic; font: bolder; background-color: khaki; padding-top: 15px; padding-bottom: -1px;">
   
-  <div class="card card-medium" (click)="selection.value = 'fw1'" tabindex="0" style="text-align: center; background-color: cornsilk ;">
+  <div class="card card-medium" (click)="selection.value = 'fw1'" tabindex="0" style="text-align: center; background-color: lightgoldenrodyellow ;">
     <span>FWPDM PCC - SR</span>
   </div>
 
-  <div class="card card-medium" (click)="selection.value = 'fw2'" tabindex="0" style="text-align: center; background-color: cornsilk">
+  <div class="card card-medium" (click)="selection.value = 'fw2'" tabindex="0" style="text-align: center; background-color: lightgoldenrodyellow">
     <span>FWPDM PCC - Retail Info</span>
   </div>
 </div>
@@ -1047,5 +1051,25 @@ Flex Type = \49742\250384\250572\69159400  --- Promo
           s.att3,
           seas.att1,
           src.att1;
+    </pre>
+    <pre *ngSwitchCase="'pcx10'">
+      /*Only for Vendor Color or Team/Player*/
+      SELECT
+          colorname AS "Color Name",
+          ptc_lng_12typeInfoLCSColor as "Color Primary Id",
+          ptc_str_13typeInfoLCSColor as "Abbreviation",
+          ptc_str_4typeInfoLCSColor as "Team or Player Name",
+          ptc_str_7typeInfoLCSColor as "Type",
+          ptc_str_51typeInfoLCSColor as "Short Description",
+          ptc_str_3typeInfoLCSColor as "Initial Season",
+          ptc_str_2typeInfoLCSColor as "State",
+          ptc_str_41typeInfoLCSColor as "Status"    
+      FROM
+          MANREV.lcscolor 
+      WHERE
+          ptc_lng_12typeInfoLCSColor in () //Color Primary Id
+          
+      ORDER BY
+          "Color Name";
     </pre>
 </div>
