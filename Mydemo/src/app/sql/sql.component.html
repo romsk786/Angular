@@ -214,6 +214,11 @@
   <div class="card card-medium" (click)="selection.value = 'pcx9'" tabindex="0" style="text-align: center; background-color: lightgoldenrodyellow ;">
     <span>SATRASSUM & AHS</span>
   </div>
+
+  <div class="card card-medium" (click)="selection.value = 'pcx11'" tabindex="0" style="text-align: center; background-color: lightgoldenrodyellow ;">
+    <span>Commonly used attributes in PCX</span>
+  </div>
+
 </div>
 
 <h2 style="text-align: center; text-decoration: underline; background-color: darkkhaki;">EQ Queries</h2>
@@ -228,7 +233,7 @@
   </div>
 
   <div class="card card-medium" (click)="selection.value = 'eq3'" tabindex="0" style="text-align: center; background-color: lightgoldenrodyellow ;">
-    <span>EQ DB Info for Business Objects</span>
+    <span>EQ Query for Flextypeidpath</span>
   </div>
 
   <div class="card card-medium" (click)="selection.value = 'eq4'" tabindex="0" style="text-align: center; background-color: lightgoldenrodyellow ;">
@@ -792,41 +797,8 @@ Flex Type = \49742\250384\250572\69159400  --- Promo
         att25 IN ();
     </pre>
     <pre *ngSwitchCase="'eq3'">
-        /*Features & Benefits in BO*/
-        select * from wcadmin.lcslifecyclemanaged where flextypeidpath = '\5711\12503\12525'
-        order by updatestampa2 desc;
-
-        /*Seasons in BO*/
-        select * from wcadmin.lcslifecyclemanaged where flextypeidpath = '\5711\12117\12422'
-        order by updatestampa2 desc;
-
-        /*Categories in BO*/
-        select * from wcadmin.lcslifecyclemanaged where flextypeidpath = '\5711\12117\12129'
-        order by updatestampa2 desc;
-
-        /*Sub categories in BO*/
-        select * from wcadmin.lcslifecyclemanaged where flextypeidpath = '\5711\12117\12491'
-        order by updatestampa2 desc;
-
-        /*Segment Xref table*/
-        select * from wcadmin.lcslifecyclemanaged where flextypeidpath = '\5711\13064\13128' 
-        order by updatestampa2 desc;
-
-        /*Segments in BO*/
-        select * from wcadmin.lcslifecyclemanaged where flextypeidpath = '\5711\12117\12459' 
-        order by updatestampa2 desc;
-
-        /*SPORT ACTIVITIES in BO*/
-        select * from wcadmin.lcslifecyclemanaged where flextypeidpath = '\5711\12117\12486' 
-        order by updatestampa2 desc;
-
-        /*Season Group Master Table in BO*/
-        select * from wcadmin.lcslifecyclemanaged where flextypeidpath = '\5711\12973' 
-        order by updatestampa2 desc;
-
-        /*Category SubCategory XREF Table in BO*/
-        select * from wcadmin.lcslifecyclemanaged where flextypeidpath = '\5711\13064\13065'
-        order by updatestampa2 desc;
+      ----------Query to get Flextypeidpath for LCSLIFECYCLEMANAGED (Business Objects)-----------------
+      select typeidpath, typename from WCADMIN.flextype where typetablename = 'LCSLIFECYCLEMANAGED';
 
         --------Below is mapping of db attributes to Flex attributes for Category SubCategory XREF table---------
           att1 = SubCategory 
@@ -1071,5 +1043,95 @@ Flex Type = \49742\250384\250572\69159400  --- Promo
           
       ORDER BY
           "Color Name";
+    </pre>
+
+    <pre *ngSwitchCase="'pcx11'">
+      --Dev Style (LCSPRODUCT)--
+      ptc_str_32typeinfolcsproduct --Devstyle Number
+      ptc_str_20typeinfolcsproduct --Marketing Name
+      ptc_str_15typeinfolcsproduct --Model ID
+      ptc_str_17typeinfolcsproduct --Model Name
+      ptc_str_10typeinfolcsproduct --Gender
+      ptc_str_2typeinfolcsproduct --Age
+      ptc_str_12typeinfolcsproduct --Sports Activity
+      ptc_str_37typeinfolcsproduct --Initial Season
+
+      --Dev Style / Season (LCSPRODUCTSEASONLINK)--
+      ptc_str_14typeinfolcsproduct --Development Team
+      ptc_lng_11typeInfoLCSProduct --Dev Style Season ID
+      ptc_str_10typeInfoLCSProduct --Model Offering ID
+      (SELECT lcslifecyclemanaged.ptc_str_10typeinfolcslifecyc FROM manrev.lcslifecyclemanaged lcslifecyclemanaged 
+      WHERE productseasonlink.ida3a2typeinfolcsproductseas = lcslifecyclemanaged.ida2a2) --TD Code
+
+      --Colorway (LCSSKU)--
+      ptc_lng_1typeinfolcssku --Colorway ID
+      ptc_str_1typeinfolcssku --Colorway Name 
+      ptc_str_2typeinfolcssku --Dev Colorway State
+      ptc_str_19typeinfolcssku --Dev Colorway Gate
+      ptc_str_13typeinfolcssku --Dev Colorway Status
+
+      --Colorway / Season (LCSSKUSEASONLINK)--
+      ptc_str_13typeinfolcsskuseas --Product C/O Status
+      ptc_str_5typeInfoLCSSKUSeaso --Product Offering ID
+      ptc_lng_1typeInfoLCSSKUSeaso --Colorway Season ID
+      ptc_str_2typeInfoLCSSKUSeaso --Development Team 
+
+      --Color (LCSCOLOR)--
+      ptc_lng_12typeInfoLCSColor --Color Primary ID
+      ptc_str_9typeInfoLCSColor --Available Engines
+      ptc_str_13typeInfoLCSColor --Abbreviation
+      ptc_str_50typeInfoLCSColor --Legacy Color Code
+      ptc_str_22typeInfoLCSColor --PCX Color Code
+      ptc_str_1typeInfoLCSColor --PCX Color Description
+      ptc_lng_6typeInfoLCSColor --PPS Color ID
+      ptc_str_2typeInfoLCSColor --State
+      ptc_str_41typeInfoLCSColor --Status
+      ptc_str_44typeInfoLCSColor --French Abbreviation
+      ptc_str_28typeInfoLCSColor --French Description
+
+      --Palette (LCSPALETTE)--
+      ptc_lng_1typeInfoLCSPalette --Palette ID
+      ptc_str_1typeInfoLCSPalette --Palette Name
+      
+      --AP Material & Material Supplier (LCSMATERIAL & LCSMATERIALSUPPLIER)--
+      ptc_lng_38typeInfoLCSMateria --PCX Material Number
+      ptc_lng_30typeInfoLCSMateria --PCX Supplied Material Number
+      ptc_lng_1typeInfoLCSMaterial --PDM Material Number
+      ptc_str_103typeInfoLCSMateri --PDM Material by Supplier Number
+      ptc_str_57typeInfoLCSMateria --PDM Material Name
+      ptc_lng_120typeInfoLCSMateri --PPS Item Number
+      ptc_str_321typeInfoLCSMateri --PPS Submit Number
+
+      --FW Material & Material Supplier (LCSMATERIAL & LCSMATERIALSUPPLIER)--
+      ptc_lng_38typeInfoLCSMateria --PCX Material Number
+      ptc_lng_30typeInfoLCSMateria --PCX Supplied Material Number
+      ptc_str_109typeInfoLCSMateri --PDM Material Number
+      ptc_str_103typeInfoLCSMateri --PDM Material by Supplier Number
+      ptc_str_57typeInfoLCSMateria --PDM Material Name
+
+      --Supplier (LCSSUPPLIER)
+      ptc_str_24typeinfolcssupplie --PCC
+      ptc_str_60typeinfolcssupplie --Factory Group
+      ptc_str_21typeInfoLCSSupplie --Supplier Name
+      ptc_lng_10typeInfoLCSSupplie --Supplier ID
+      ptc_str_1typeInfoLCSSupplier --Name 
+      ptc_str_16typeInfoLCSSupplie --Vendor Group
+      ptc_str_23typeInfoLCSSupplie --Legacy Factory Code
+      ptc_str_2typeInfoLCSSupplier --Legacy PCC Code
+      ptc_str_28typeInfoLCSSupplie --Legacy Vendor Code
+      ptc_str_61typeInfoLCSSupplie --Nike Liaison Office
+
+      --Sourcing Config (LCSSOURCINGCONFIG)--
+      ptc_str_2typeInfoLCSSourcing --Source Name 
+      branchIdA3B2typeInfoLCSSourc --PCC ID
+      ptc_lng_1typeInfoLCSSourcing --Sourcing Config ID
+      branchIdA3C2typeInfoLCSSourc --Production Factory 
+
+      --Source to Season Link (LCSSOURCETOSEASONLINK)--
+      ptc_bln_1typeInfoLCSSourceTo --Sourcing Season Primary Flag
+      ptc_lng_4typeInfoLCSSourceTo --Sourcing Season ID
+      branchIdA3B2typeInfoLCSSourc --PCC ID
+
+
     </pre>
 </div>
