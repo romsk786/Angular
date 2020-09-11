@@ -36,23 +36,25 @@
     font-weight: 600;
   }
 
+
   .toolbar a {
-  float: left;
-  display: block;
-  color:palegoldenrod;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-  font-size: 17px;
+    float: left;
+    display: block;
+    color:coral;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 20px;
   }
 
   .toolbar a:hover {
     background: gray;
+    text-decoration: none;
   }
-
-  .toolbar a:active {
-    background-color: gray;
-    color: blue;
+  
+  .active {
+    background: aliceblue;
+    
   }
 
   .toolbar img {
@@ -70,6 +72,8 @@
 
 </style>
 
+
+
 <!-- Toolbar -->
 
 <!-- Links -->
@@ -79,15 +83,15 @@
   
     <img src="assets/images/rk.png" alt="logo" style="width: 60px; height: 60px;">
 
-    <a class="nav-link" style="font-size: medium; padding-top: 5px; padding-bottom: 5px; padding-left: 5px; padding-right: 5px;" routerLink="home" id="home" [routerLinkActive]="'activate'"> Home </a>   
+    <a class="nav-link" style="font-size: medium; padding-top: 5px; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; " routerLink="home" id="home" [routerLinkActive]="'active'"> Home </a>   
     
-    <a class="nav-link" style="font-size: medium; padding-top: 5px; padding-bottom: 5px; padding-left: 5px; padding-right: 5px;" routerLink="app-links" id="app-links" [routerLinkActive]="'activate'"> App Links </a>
+    <a class="nav-link" style="font-size: medium; padding-top: 5px; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; " routerLink="app-links" id="app-links" [routerLinkActive]="'active'"> App-Links </a>
     
-    <a class="nav-link" style="font-size: medium; padding-top: 5px; padding-bottom: 5px; padding-left: 5px; padding-right: 5px;" routerLink="quick-links" id="quick-links" [routerLinkActive]="'activate'"> Other Links </a>   
+    <a class="nav-link" style="font-size: medium; padding-top: 5px; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; " routerLink="quick-links" id="quick-links" [routerLinkActive]="'active'"> Other Links </a>   
     
-    <a class="nav-link" style="font-size: medium; padding-top: 5px; padding-bottom: 5px; padding-left: 5px; padding-right: 5px;" routerLink="dl" id="dl" [routerLinkActive]="'activate'"> DL's </a>
+    <a class="nav-link" style="font-size: medium; padding-top: 5px; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; " routerLink="dl" id="dl" [routerLinkActive]="'active'"> DL's </a>
     
-    <a class="nav-link" style="font-size: medium; padding-top: 5px; padding-bottom: 5px; padding-left: 5px; padding-right: 5px;" routerLink="sql" id="sql" [routerLinkActive]="'activate'"> Queries </a>
+    <a class="nav-link" style="font-size: medium; padding-top: 5px; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; " routerLink="sql" id="sql" [routerLinkActive]="'active'"> Queries </a>
     
     <div class="spacer"></div>
 </div>
