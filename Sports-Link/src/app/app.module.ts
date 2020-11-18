@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { SportsComponent } from './sports/sports.component';
 import { SocialMediaComponent } from './socialmedia/socialmedia.component';
+import { FinanceComponent } from './finance/finance.component';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { SocialMediaComponent } from './socialmedia/socialmedia.component';
     AppComponent,
     HomeComponent,
     SportsComponent,
-    SocialMediaComponent
+    SocialMediaComponent,
+    FinanceComponent
   ],
   imports: [
     BrowserModule,
